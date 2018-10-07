@@ -72,9 +72,10 @@ namespace CVGS
 
         }
 
-        protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
+        protected void LoggingOut(object sender, EventArgs e)
         {
-            Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session["Check"] = null;
+            Session["User"] = null;
         }
     }
 
