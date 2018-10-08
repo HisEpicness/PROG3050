@@ -31,50 +31,46 @@ namespace CVGS.Account
         {
             if (IsValid)
             {
-                var result = SignInStatus.Failure;
-
-                IList<LoginModel> logins = null;
-
-                using (var ctx = new CVGSEntities())
+                bool result = checkLoginStatus(Username.Text, Password.Text);//SignInStatus.Failure;
+                
+                switch (result)
                 {
-                    logins = ctx.logins.Select(s => new LoginModel()
-                    { 
-                        user = s.username,
-                        pword = s.password
-                    }).ToList<LoginModel>();
+                    case true:
+                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                        break;
+                    case false:
+                    default:
+                        FailureText.Text = "Invalid login attempt";
+                        ErrorMessage.Visible = true;
+                        break;
                 }
-
-                foreach (var log in logins)
-                {
-                    if (Username.Text == log.user && Password.Text == log.pword)
-                    {
-                        result = SignInStatus.Success;
-                        Session["Check"] = true;
-                        Session["User"] = Username.Text;
-                    }
-                }
-
-                    switch (result)
-                    {
-                        case SignInStatus.Success:
-                            IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-                            break;
-                        case SignInStatus.LockedOut:
-                            Response.Redirect("/Account/Lockout");
-                            break;
-                        case SignInStatus.RequiresVerification:
-                            Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}",
-                                                            Request.QueryString["ReturnUrl"],
-                                                            RememberMe.Checked),
-                                              true);
-                            break;
-                        case SignInStatus.Failure:
-                        default:
-                            FailureText.Text = "Invalid login attempt";
-                            ErrorMessage.Visible = true;
-                            break;
-                    }
             }
+        }
+
+        private bool checkLoginStatus(string enteredUser, string enteredPass)
+        {
+            IList<LoginModel> logins = null;
+            bool result = false;
+
+            using (var ctx = new CVGSEntities())
+            {
+                logins = ctx.logins.Select(s => new LoginModel()
+                {
+                    user = s.username,
+                    pword = s.password
+                }).ToList<LoginModel>();
+            }
+
+            foreach (var log in logins)
+            {
+                if (enteredUser == log.user && enteredPass == log.pword)
+                {
+                    result = true;
+                    Session["Check"] = true;
+                    Session["User"] = enteredUser;
+                }
+            }
+            return result;
         }
     }
 }
