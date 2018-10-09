@@ -92,18 +92,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__event__createdBy__52593CB8">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="event" Type="Self.event" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="username" />
-            </Principal>
-            <Dependent Role="event">
-              <PropertyRef Name="createdBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__game__genre__49C3F6B7">
           <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
           <End Role="game" Type="Self.game" Multiplicity="*" />
@@ -137,6 +125,18 @@
             </Principal>
             <Dependent Role="game">
               <PropertyRef Name="rating" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__login__username__5AEE82B9">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="login" Type="Self.login" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="username" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -201,10 +201,6 @@
             <End Role="user" EntitySet="user" />
             <End Role="event" EntitySet="event" />
           </AssociationSet>
-          <AssociationSet Name="FK__event__createdBy__52593CB8" Association="Self.FK__event__createdBy__52593CB8">
-            <End Role="user" EntitySet="user" />
-            <End Role="event" EntitySet="event" />
-          </AssociationSet>
           <AssociationSet Name="FK__game__genre__49C3F6B7" Association="Self.FK__game__genre__49C3F6B7">
             <End Role="genre" EntitySet="genre" />
             <End Role="game" EntitySet="game" />
@@ -216,6 +212,10 @@
           <AssociationSet Name="FK__game__rating__4CA06362" Association="Self.FK__game__rating__4CA06362">
             <End Role="esrb_rating" EntitySet="esrb_rating" />
             <End Role="game" EntitySet="game" />
+          </AssociationSet>
+          <AssociationSet Name="FK__login__username__5AEE82B9" Association="Self.FK__login__username__5AEE82B9">
+            <End Role="user" EntitySet="user" />
+            <End Role="login" EntitySet="login" />
           </AssociationSet>
           <AssociationSet Name="FK__orders__gameId__4F7CD00D" Association="Self.FK__orders__gameId__4F7CD00D">
             <End Role="game" EntitySet="game" />
@@ -257,7 +257,6 @@
           <Property Name="createdBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="user" Relationship="Self.FK__event__createdBy__4D94879B" FromRole="event" ToRole="user" />
-          <NavigationProperty Name="user1" Relationship="Self.FK__event__createdBy__52593CB8" FromRole="event" ToRole="user" />
         </EntityType>
         <EntityType Name="game">
           <Key>
@@ -292,6 +291,7 @@
           </Key>
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK__login__username__5AEE82B9" FromRole="login" ToRole="user" />
         </EntityType>
         <EntityType Name="order">
           <Key>
@@ -318,7 +318,7 @@
           <Property Name="age" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="employee" Type="Boolean" />
           <NavigationProperty Name="events" Relationship="Self.FK__event__createdBy__4D94879B" FromRole="user" ToRole="event" />
-          <NavigationProperty Name="events1" Relationship="Self.FK__event__createdBy__52593CB8" FromRole="user" ToRole="event" />
+          <NavigationProperty Name="login" Relationship="Self.FK__login__username__5AEE82B9" FromRole="user" ToRole="login" />
           <NavigationProperty Name="orders" Relationship="Self.FK__orders__username__4E88ABD4" FromRole="user" ToRole="orders" />
           <NavigationProperty Name="games" Relationship="Self.wishList" FromRole="user" ToRole="game" />
         </EntityType>
@@ -335,18 +335,6 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__event__createdBy__4D94879B">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="event" Type="Self.event" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="username" />
-            </Principal>
-            <Dependent Role="event">
-              <PropertyRef Name="createdBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__event__createdBy__52593CB8">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="event" Type="Self.event" Multiplicity="*" />
           <ReferentialConstraint>
@@ -394,6 +382,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__login__username__5AEE82B9">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="login" Type="Self.login" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="login">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__orders__username__4E88ABD4">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="orders" Type="Self.order" Multiplicity="*" />
@@ -426,10 +426,6 @@
             <End Role="user" EntitySet="users" />
             <End Role="event" EntitySet="events" />
           </AssociationSet>
-          <AssociationSet Name="FK__event__createdBy__52593CB8" Association="Self.FK__event__createdBy__52593CB8">
-            <End Role="user" EntitySet="users" />
-            <End Role="event" EntitySet="events" />
-          </AssociationSet>
           <AssociationSet Name="FK__game__genre__49C3F6B7" Association="Self.FK__game__genre__49C3F6B7">
             <End Role="genre" EntitySet="genres" />
             <End Role="game" EntitySet="games" />
@@ -441,6 +437,10 @@
           <AssociationSet Name="FK__orders__gameId__4F7CD00D" Association="Self.FK__orders__gameId__4F7CD00D">
             <End Role="game" EntitySet="games" />
             <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__login__username__5AEE82B9" Association="Self.FK__login__username__5AEE82B9">
+            <End Role="user" EntitySet="users" />
+            <End Role="login" EntitySet="logins" />
           </AssociationSet>
           <AssociationSet Name="FK__orders__username__4E88ABD4" Association="Self.FK__orders__username__4E88ABD4">
             <End Role="user" EntitySet="users" />

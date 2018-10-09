@@ -87,18 +87,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__event__createdBy__52593CB8">
-    <End Role="user" Type="Self.user" Multiplicity="1" />
-    <End Role="event" Type="Self.event" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="user">
-        <PropertyRef Name="username" />
-      </Principal>
-      <Dependent Role="event">
-        <PropertyRef Name="createdBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__game__genre__49C3F6B7">
     <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
     <End Role="game" Type="Self.game" Multiplicity="*" />
@@ -132,6 +120,18 @@
       </Principal>
       <Dependent Role="game">
         <PropertyRef Name="rating" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__login__username__5AEE82B9">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="login" Type="Self.login" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="login">
+        <PropertyRef Name="username" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -196,10 +196,6 @@
       <End Role="user" EntitySet="user" />
       <End Role="event" EntitySet="event" />
     </AssociationSet>
-    <AssociationSet Name="FK__event__createdBy__52593CB8" Association="Self.FK__event__createdBy__52593CB8">
-      <End Role="user" EntitySet="user" />
-      <End Role="event" EntitySet="event" />
-    </AssociationSet>
     <AssociationSet Name="FK__game__genre__49C3F6B7" Association="Self.FK__game__genre__49C3F6B7">
       <End Role="genre" EntitySet="genre" />
       <End Role="game" EntitySet="game" />
@@ -211,6 +207,10 @@
     <AssociationSet Name="FK__game__rating__4CA06362" Association="Self.FK__game__rating__4CA06362">
       <End Role="esrb_rating" EntitySet="esrb_rating" />
       <End Role="game" EntitySet="game" />
+    </AssociationSet>
+    <AssociationSet Name="FK__login__username__5AEE82B9" Association="Self.FK__login__username__5AEE82B9">
+      <End Role="user" EntitySet="user" />
+      <End Role="login" EntitySet="login" />
     </AssociationSet>
     <AssociationSet Name="FK__orders__gameId__4F7CD00D" Association="Self.FK__orders__gameId__4F7CD00D">
       <End Role="game" EntitySet="game" />

@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity;
 
 namespace CVGS
 {
-    public partial class SiteMaster : MasterPage
+    public partial class Unauthorized : MasterPage
     {
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
@@ -69,7 +69,11 @@ namespace CVGS
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Check"] == null)
+            {
+                Response.Redirect("/Account/Login");
 
+            }
         }
 
         protected void LoggingOut(object sender, EventArgs e)

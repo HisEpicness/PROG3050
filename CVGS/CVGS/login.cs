@@ -16,5 +16,7 @@ namespace CVGS
     {
         public string username { get; set; }
         public string password { get; set; }
+    
+        public virtual user user { get; set; }
     }
 }

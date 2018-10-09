@@ -11,11 +11,6 @@ namespace CVGS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Check"] == null)
-            {
-                Response.Redirect("/Account/Login");
-
-            }
         }
     }
 }

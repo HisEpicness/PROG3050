@@ -480,6 +480,13 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Unauthorized.Master.cs">
+      <DependentUpon>Unauthorized.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Unauthorized.Master.designer.cs">
+      <DependentUpon>Unauthorized.Master</DependentUpon>
+    </Compile>
     <Compile Include="user.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
@@ -499,6 +506,7 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Unauthorized.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

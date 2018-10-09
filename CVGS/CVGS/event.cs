@@ -21,6 +21,5 @@ namespace CVGS
         public string description { get; set; }
     
         public virtual user user { get; set; }
-        public virtual user user1 { get; set; }
     }
 }

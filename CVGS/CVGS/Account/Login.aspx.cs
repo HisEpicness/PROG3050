@@ -31,7 +31,7 @@ namespace CVGS.Account
         {
             if (IsValid)
             {
-                bool result = checkLoginStatus(Username.Text, Password.Text);//SignInStatus.Failure;
+                bool result = checkLoginStatus(Username.Text, Password.Text);
                 
                 switch (result)
                 {
@@ -61,15 +61,32 @@ namespace CVGS.Account
                 }).ToList<LoginModel>();
             }
 
+            string usr = null;
+
             foreach (var log in logins)
             {
                 if (enteredUser == log.user && enteredPass == log.pword)
                 {
                     result = true;
+                    usr = log.user;
                     Session["Check"] = true;
                     Session["User"] = enteredUser;
                 }
             }
+
+            //grab if user is employee and if so make Session["Emp"] = true
+            //if (usr != null)
+            //{
+            //    using (var ctx = new CVGSEntities())
+            //    {
+            //        logins = ctx.logins.Select(s => new LoginModel()
+            //        {
+            //            user = s.username,
+            //            pword = s.password
+            //        }).ToList<LoginModel>();
+            //    }
+            //}
+
             return result;
         }
     }
