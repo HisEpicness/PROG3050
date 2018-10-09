@@ -5,6 +5,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using CVGS.Models;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Security;
 
 namespace CVGS.Account
 {
@@ -27,35 +31,46 @@ namespace CVGS.Account
         {
             if (IsValid)
             {
-                // Validate the user password
-                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
-
-                // This doen't count login failures towards account lockout
-                // To enable password failures to trigger lockout, change to shouldLockout: true
-                var result = signinManager.PasswordSignIn(Email.Text, Password.Text, RememberMe.Checked, shouldLockout: false);
-
+                bool result = checkLoginStatus(Username.Text, Password.Text);//SignInStatus.Failure;
+                
                 switch (result)
                 {
-                    case SignInStatus.Success:
+                    case true:
                         IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         break;
-                    case SignInStatus.LockedOut:
-                        Response.Redirect("/Account/Lockout");
-                        break;
-                    case SignInStatus.RequiresVerification:
-                        Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
-                                                        Request.QueryString["ReturnUrl"],
-                                                        RememberMe.Checked),
-                                          true);
-                        break;
-                    case SignInStatus.Failure:
+                    case false:
                     default:
                         FailureText.Text = "Invalid login attempt";
                         ErrorMessage.Visible = true;
                         break;
                 }
             }
+        }
+
+        private bool checkLoginStatus(string enteredUser, string enteredPass)
+        {
+            IList<LoginModel> logins = null;
+            bool result = false;
+
+            using (var ctx = new CVGSEntities())
+            {
+                logins = ctx.logins.Select(s => new LoginModel()
+                {
+                    user = s.username,
+                    pword = s.password
+                }).ToList<LoginModel>();
+            }
+
+            foreach (var log in logins)
+            {
+                if (enteredUser == log.user && enteredPass == log.pword)
+                {
+                    result = true;
+                    Session["Check"] = true;
+                    Session["User"] = enteredUser;
+                }
+            }
+            return result;
         }
     }
 }
