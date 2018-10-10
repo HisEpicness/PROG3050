@@ -10,6 +10,15 @@
         <h4>Create a new account</h4>
         <hr />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
+
+        <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="userName" CssClass="col-md-2 control-label">UserName</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="userName" CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="firstName"
+                    CssClass="text-danger" ErrorMessage="The userName field is required." />
+            </div>
+        </div>
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-2 control-label">Email</asp:Label>
             <div class="col-md-10">
@@ -40,14 +49,6 @@
             </div>
         </div>
         <div class="form-group">
-            <asp:Label runat="server" AssociatedControlID="lastName" CssClass="col-md-2 control-label">Last Name</asp:Label>
-            <div class="col-md-10">
-                <asp:TextBox runat="server" ID="lastName" CssClass="form-control" />
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="lastName"
-                    CssClass="text-danger" ErrorMessage="The last name field is required." />
-            </div>
-        </div>
-        <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="firstName" CssClass="col-md-2 control-label">First Name</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="firstName" CssClass="form-control" />
@@ -56,19 +57,27 @@
             </div>
         </div>
         <div class="form-group">
-            <asp:Label runat="server" AssociatedControlID="age" CssClass="col-md-2 control-label">Age</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="lastName" CssClass="col-md-2 control-label">Last Name</asp:Label>
             <div class="col-md-10">
-                <asp:TextBox runat="server" ID="age" CssClass="form-control" />
-                <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="age"
+                <asp:TextBox runat="server" ID="lastName" CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="lastName"
+                    CssClass="text-danger" ErrorMessage="The last name field is required." />
+            </div>
+        </div>
+        <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="Age" CssClass="col-md-2 control-label">Age</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="Age" CssClass="form-control" />
+                <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="Age"
                     CssClass="text-danger" ErrorMessage="The age field is required." />
                 <asp:RangeValidator Display="Dynamic" runat="server" ControlToValidate="age" MinimumValue="10" MaximumValue="70"
                     CssClass="text-danger" Type="Integer" ErrorMessage="The age field should be in range of 10-70." />
             </div>
         </div>
         <div class="form-group">
-            <asp:Label runat="server" AssociatedControlID="employee" CssClass="col-md-2 control-label">Employee</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="Employee" CssClass="col-md-2 control-label">Employee</asp:Label>
             <div class="col-md-10">
-                <asp:CheckBox runat="server" ID="employee" CssClass="form-control" />
+                <asp:CheckBox runat="server" ID="Employee" CssClass="form-control"  />
             </div>
         </div>
         <div class="form-group">
