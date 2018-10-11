@@ -461,6 +461,7 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="order.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>

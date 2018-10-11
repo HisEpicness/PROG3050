@@ -75,17 +75,22 @@ namespace CVGS.Account
             }
 
             //grab if user is employee and if so make Session["Emp"] = true
-            //if (usr != null)
-            //{
-            //    using (var ctx = new CVGSEntities())
-            //    {
-            //        logins = ctx.logins.Select(s => new LoginModel()
-            //        {
-            //            user = s.username,
-            //            pword = s.password
-            //        }).ToList<LoginModel>();
-            //    }
-            //}
+            UserModel login = null;
+
+            using (var ctx = new CVGSEntities())
+            {
+                login = ctx.users
+                    .Where(s => s.username == enteredUser)
+                    .Select(s => new UserModel()
+                    {
+                        username = s.username,
+                    }).FirstOrDefault<UserModel>();
+            }
+
+            if (login.employee == true)
+            {
+                Session["Emp"] = true;
+            }
 
             return result;
         }

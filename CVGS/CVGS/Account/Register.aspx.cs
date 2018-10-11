@@ -100,15 +100,15 @@ namespace CVGS.Account
             if (!invalidUserName)
             {
                 using (var ctx = new CVGSEntities())
-            {
-                if (ModelState.IsValid)
                 {
-                    ctx.users.Add(usr);
-                    ctx.logins.Add(log);
-                    ctx.SaveChanges();
-                }
+                    if (ModelState.IsValid)
+                    {
+                        ctx.users.Add(usr);
+                        ctx.logins.Add(log);
+                        ctx.SaveChanges();
+                    }
                 
-            }
+                }
 
                 userName.Text = "";
                 firstName.Text = "";
