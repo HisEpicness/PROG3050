@@ -17,7 +17,7 @@ namespace CVGS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public user()
         {
-            this.events = new HashSet<@event>();
+            this.eventDatas = new HashSet<eventData>();
             this.orders = new HashSet<order>();
             this.games = new HashSet<game>();
         }
@@ -32,7 +32,7 @@ namespace CVGS
         public Nullable<bool> employee { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<@event> events { get; set; }
+        public virtual ICollection<eventData> eventDatas { get; set; }
         public virtual login login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }

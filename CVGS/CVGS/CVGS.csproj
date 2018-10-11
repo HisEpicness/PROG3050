@@ -444,7 +444,7 @@
     <Compile Include="esrb_rating.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
-    <Compile Include="event.cs">
+    <Compile Include="eventData.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
     <Compile Include="game.cs">

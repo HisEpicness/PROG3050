@@ -18,6 +18,7 @@ using Owin;
 using CVGS.Models;
 using System.Data.SqlClient;
 using System.Data;
+using System.Collections.Generic;
 
 namespace CVGS.Account
 {
@@ -38,26 +39,17 @@ namespace CVGS.Account
             Boolean isEmployee = false;
             Boolean invalidUserName = false;
 
-            SqlConnection con = new SqlConnection("Data Source=2A409-A03;Initial Catalog=CVGS;User ID=sa;Password=Conestoga1");
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
+            IList<LoginModel> logins = null;
+            bool result = false;
 
-            cmd.CommandText = "SELECT [userName] FROM [user]";
-            con.Open();
-
-            try
+            using (var ctx = new CVGSEntities())
             {
-                dr = cmd.ExecuteReader();
-                dt = new DataTable();
-                dt.Load(dr);
-                con.Close();
+                logins = ctx.logins.Select(s => new LoginModel()
+                {
+                    user = s.username,
+                    pword = s.password
+                }).ToList<LoginModel>();
             }
-            catch (SqlException err)
-            {
-                Console.WriteLine(err.Message);
-                con.Close();
-            }
-
 
             if (Email.Text.Trim() != null || Email.Text.Trim() != "")
             {
@@ -65,9 +57,9 @@ namespace CVGS.Account
             }
             if (userName.Text.Trim() != null || userName.Text.Trim() != "")
             {
-                foreach (DataRow row in dt.Rows)
+                foreach (LoginModel row in logins)
                 {
-                    if (userName.Text.Trim() == row["userName"].ToString())
+                    if (userName.Text.Trim() == row.user.ToString())
                     {
                         ErrorMessage.Text = "Invalid user name";
                         invalidUserName = true;
@@ -91,62 +83,40 @@ namespace CVGS.Account
             age = Convert.ToInt16(Age.Text.Trim());
             isEmployee = Employee.Checked;
 
+            user usr = new user();
+            usr.username = uName;
+            usr.email = email;
+            usr.firstName = fName;
+            usr.lastname = lName;
+            usr.mailAddress = null;
+            usr.shipAddress = null;
+            usr.age = age;
+            usr.employee = isEmployee;
+
+            login log = new login();
+            log.username = uName;
+            log.password = password;
+
             if (!invalidUserName)
             {
-                String insert = "INSERT INTO [user] " +
-                                 "([userName], [firstName], [lastName], [email], [mailAddress], [shipAddress], [age], [employee]) VALUES " +
-                                 "('" + uName + "', " +
-                                 "'" + fName + "', " +
-                                 "'" + lName + "', " +
-                                 "'" + email + "', " +
-                                 "'" + null + "', " +
-                                 "'" + null + "', " +
-                                 "'" + age + "', " +
-                                 "'" + isEmployee + "')";
-                cmd.CommandText = insert;
-                con.Open();
-
-                try
+                using (var ctx = new CVGSEntities())
+            {
+                if (ModelState.IsValid)
                 {
-                    dr = cmd.ExecuteReader();
-                    dt = new DataTable();
-                    dt.Load(dr);
-
-                    insert = "INSERT INTO [login] " +
-                                     "([userName], [password]) VALUES " +
-                                     "('" + uName + "', " +
-                                     "'" + password + "')";
-                    cmd.CommandText = insert;
-
-                    try
-                    {
-                        cmd.CommandText = insert;
-                        dr = cmd.ExecuteReader();
-                        dt = new DataTable();
-                        dt.Load(dr);
-                    }
-                    catch (SqlException err)
-                    {
-                        Console.WriteLine(err.Message);
-                        con.Close();
-                    }
-                    con.Close();
+                    ctx.users.Add(usr);
+                    ctx.logins.Add(log);
+                    ctx.SaveChanges();
                 }
-                catch (SqlException err)
-                {
-                    Console.WriteLine(err.Message);
-                    con.Close();
-                }
+                
+            }
 
                 userName.Text = "";
                 firstName.Text = "";
                 lastName.Text = "";
                 Age.Text = "";
                 Email.Text = "";
-
-                Response.Write("<script>alert('User Added Successfully')</script>");
+                Response.Redirect("/Account/Login");
             }
-            
         }
     }
 }

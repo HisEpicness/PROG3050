@@ -9,9 +9,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="events">
-      <EntityTypeMapping TypeName="CVGSModel.event">
-        <MappingFragment StoreEntitySet="event">
+    <EntitySetMapping Name="eventDatas">
+      <EntityTypeMapping TypeName="CVGSModel.eventData">
+        <MappingFragment StoreEntitySet="eventData">
           <ScalarProperty Name="eventId" ColumnName="eventId" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="date" ColumnName="date" />
