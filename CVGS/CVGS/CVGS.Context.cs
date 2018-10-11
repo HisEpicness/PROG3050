@@ -26,7 +26,7 @@ namespace CVGS
         }
     
         public virtual DbSet<esrb_rating> esrb_rating { get; set; }
-        public virtual DbSet<@event> events { get; set; }
+        public virtual DbSet<eventData> eventDatas { get; set; }
         public virtual DbSet<game> games { get; set; }
         public virtual DbSet<genre> genres { get; set; }
         public virtual DbSet<login> logins { get; set; }

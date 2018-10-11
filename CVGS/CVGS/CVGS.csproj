@@ -444,7 +444,7 @@
     <Compile Include="esrb_rating.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
-    <Compile Include="event.cs">
+    <Compile Include="eventData.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
     <Compile Include="game.cs">
@@ -461,6 +461,7 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="order.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>

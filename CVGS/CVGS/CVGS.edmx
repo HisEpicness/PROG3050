@@ -12,7 +12,7 @@
           <Property Name="ratingCode" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="event">
+        <EntityType Name="eventData">
           <Key>
             <PropertyRef Name="eventId" />
           </Key>
@@ -82,12 +82,12 @@
         </EntityType>
         <Association Name="FK__event__createdBy__4D94879B">
           <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="event" Type="Self.event" Multiplicity="*" />
+          <End Role="eventData" Type="Self.eventData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
               <PropertyRef Name="username" />
             </Principal>
-            <Dependent Role="event">
+            <Dependent Role="eventData">
               <PropertyRef Name="createdBy" />
             </Dependent>
           </ReferentialConstraint>
@@ -190,7 +190,7 @@
         </Association>
         <EntityContainer Name="CVGSModelStoreContainer">
           <EntitySet Name="esrb_rating" EntityType="Self.esrb_rating" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="event" EntityType="Self.event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="eventData" EntityType="Self.eventData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="game" EntityType="Self.game" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="genre" EntityType="Self.genre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
@@ -199,7 +199,7 @@
           <EntitySet Name="wishList" EntityType="Self.wishList" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__event__createdBy__4D94879B" Association="Self.FK__event__createdBy__4D94879B">
             <End Role="user" EntitySet="user" />
-            <End Role="event" EntitySet="event" />
+            <End Role="eventData" EntitySet="eventData" />
           </AssociationSet>
           <AssociationSet Name="FK__game__genre__49C3F6B7" Association="Self.FK__game__genre__49C3F6B7">
             <End Role="genre" EntitySet="genre" />
@@ -247,7 +247,7 @@
           <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="games" Relationship="Self.FK__game__rating__4CA06362" FromRole="esrb_rating" ToRole="game" />
         </EntityType>
-        <EntityType Name="event">
+        <EntityType Name="eventData">
           <Key>
             <PropertyRef Name="eventId" />
           </Key>
@@ -256,7 +256,7 @@
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="createdBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="user" Relationship="Self.FK__event__createdBy__4D94879B" FromRole="event" ToRole="user" />
+          <NavigationProperty Name="user" Relationship="Self.FK__event__createdBy__4D94879B" FromRole="eventData" ToRole="user" />
         </EntityType>
         <EntityType Name="game">
           <Key>
@@ -317,7 +317,7 @@
           <Property Name="shipAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="age" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="employee" Type="Boolean" />
-          <NavigationProperty Name="events" Relationship="Self.FK__event__createdBy__4D94879B" FromRole="user" ToRole="event" />
+          <NavigationProperty Name="eventDatas" Relationship="Self.FK__event__createdBy__4D94879B" FromRole="user" ToRole="eventData" />
           <NavigationProperty Name="login" Relationship="Self.FK__login__username__5AEE82B9" FromRole="user" ToRole="login" />
           <NavigationProperty Name="orders" Relationship="Self.FK__orders__username__4E88ABD4" FromRole="user" ToRole="orders" />
           <NavigationProperty Name="games" Relationship="Self.wishList" FromRole="user" ToRole="game" />
@@ -336,12 +336,12 @@
         </Association>
         <Association Name="FK__event__createdBy__4D94879B">
           <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="event" Type="Self.event" Multiplicity="*" />
+          <End Role="eventData" Type="Self.eventData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
               <PropertyRef Name="username" />
             </Principal>
-            <Dependent Role="event">
+            <Dependent Role="eventData">
               <PropertyRef Name="createdBy" />
             </Dependent>
           </ReferentialConstraint>
@@ -412,7 +412,7 @@
         </Association>
         <EntityContainer Name="CVGSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="esrb_rating" EntityType="Self.esrb_rating" />
-          <EntitySet Name="events" EntityType="Self.event" />
+          <EntitySet Name="eventDatas" EntityType="Self.eventData" />
           <EntitySet Name="games" EntityType="Self.game" />
           <EntitySet Name="genres" EntityType="Self.genre" />
           <EntitySet Name="logins" EntityType="Self.login" />
@@ -424,7 +424,7 @@
           </AssociationSet>
           <AssociationSet Name="FK__event__createdBy__4D94879B" Association="Self.FK__event__createdBy__4D94879B">
             <End Role="user" EntitySet="users" />
-            <End Role="event" EntitySet="events" />
+            <End Role="eventData" EntitySet="eventDatas" />
           </AssociationSet>
           <AssociationSet Name="FK__game__genre__49C3F6B7" Association="Self.FK__game__genre__49C3F6B7">
             <End Role="genre" EntitySet="genres" />
@@ -465,9 +465,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="events">
-            <EntityTypeMapping TypeName="CVGSModel.event">
-              <MappingFragment StoreEntitySet="event">
+          <EntitySetMapping Name="eventDatas">
+            <EntityTypeMapping TypeName="CVGSModel.eventData">
+              <MappingFragment StoreEntitySet="eventData">
                 <ScalarProperty Name="eventId" ColumnName="eventId" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="date" ColumnName="date" />

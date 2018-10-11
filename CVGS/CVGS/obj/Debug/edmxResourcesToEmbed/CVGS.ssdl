@@ -7,7 +7,7 @@
     <Property Name="ratingCode" Type="char" MaxLength="10" Nullable="false" />
     <Property Name="description" Type="varchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="event">
+  <EntityType Name="eventData">
     <Key>
       <PropertyRef Name="eventId" />
     </Key>
@@ -77,12 +77,12 @@
   </EntityType>
   <Association Name="FK__event__createdBy__4D94879B">
     <End Role="user" Type="Self.user" Multiplicity="1" />
-    <End Role="event" Type="Self.event" Multiplicity="*" />
+    <End Role="eventData" Type="Self.eventData" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="user">
         <PropertyRef Name="username" />
       </Principal>
-      <Dependent Role="event">
+      <Dependent Role="eventData">
         <PropertyRef Name="createdBy" />
       </Dependent>
     </ReferentialConstraint>
@@ -185,7 +185,7 @@
   </Association>
   <EntityContainer Name="CVGSModelStoreContainer">
     <EntitySet Name="esrb_rating" EntityType="Self.esrb_rating" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="event" EntityType="Self.event" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="eventData" EntityType="Self.eventData" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="game" EntityType="Self.game" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="genre" EntityType="Self.genre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
@@ -194,7 +194,7 @@
     <EntitySet Name="wishList" EntityType="Self.wishList" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__event__createdBy__4D94879B" Association="Self.FK__event__createdBy__4D94879B">
       <End Role="user" EntitySet="user" />
-      <End Role="event" EntitySet="event" />
+      <End Role="eventData" EntitySet="eventData" />
     </AssociationSet>
     <AssociationSet Name="FK__game__genre__49C3F6B7" Association="Self.FK__game__genre__49C3F6B7">
       <End Role="genre" EntitySet="genre" />

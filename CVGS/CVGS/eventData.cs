@@ -12,7 +12,7 @@ namespace CVGS
     using System;
     using System.Collections.Generic;
     
-    public partial class @event
+    public partial class eventData
     {
         public decimal eventId { get; set; }
         public string name { get; set; }
