@@ -35,10 +35,10 @@ namespace CVGS.Models.Metadata
             ErrorMessage = "Date of Event must be yyyy-mm-dd format" + "\n")]
         public string date { get; set; }
 
-        [Display(Name = "Events' Creator")]
-        [Required]
-        [StringLength(50, MinimumLength = 2,
-            ErrorMessage = "Events' Creator must contain between 2 and 50 characters" + "\n")]
+        //[Display(Name = "Events' Creator")]
+        //[Required]
+        //[StringLength(50, MinimumLength = 2,
+        //    ErrorMessage = "Events' Creator must contain between 2 and 50 characters" + "\n")]
         public string createdBy { get; set; }
 
         [Display(Name = "Description")]

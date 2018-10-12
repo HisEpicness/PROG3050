@@ -62,6 +62,7 @@ namespace CVGS.Controllers
         [ValidateAntiForgeryToken]
         public async System.Threading.Tasks.Task<ActionResult> Create(eventData eventDatas)
         {
+            eventDatas.createdBy = Session["User"].ToString();
             if (ModelState.IsValid)
             {
                 _context.eventDatas.Add(eventDatas);
@@ -92,6 +93,8 @@ namespace CVGS.Controllers
         [ValidateAntiForgeryToken]
         public async System.Threading.Tasks.Task<ActionResult> Edit(int? id, eventData eventDatas)
         {
+            eventDatas.createdBy = Session["User"].ToString();
+
             if (id != eventDatas.eventId)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
