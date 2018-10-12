@@ -75,13 +75,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="wishList" TypeName="CVGSModel.wishList" StoreEntitySet="wishList">
-      <EndProperty Name="game">
-        <ScalarProperty Name="id" ColumnName="gameId" />
-      </EndProperty>
-      <EndProperty Name="user">
-        <ScalarProperty Name="username" ColumnName="username" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="wishLists">
+      <EntityTypeMapping TypeName="CVGSModel.wishList">
+        <MappingFragment StoreEntitySet="wishList">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="gameId" ColumnName="gameId" />
+          <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

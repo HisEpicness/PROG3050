@@ -19,7 +19,7 @@ namespace CVGS
         {
             this.eventDatas = new HashSet<eventData>();
             this.orders = new HashSet<order>();
-            this.games = new HashSet<game>();
+            this.wishLists = new HashSet<wishList>();
         }
     
         public string username { get; set; }
@@ -37,6 +37,6 @@ namespace CVGS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<game> games { get; set; }
+        public virtual ICollection<wishList> wishLists { get; set; }
     }
 }

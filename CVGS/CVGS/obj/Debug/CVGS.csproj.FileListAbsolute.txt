@@ -548,7 +548,6 @@ C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS
 C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\bin\Microsoft.AI.Web.xml
 C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\obj\Debug\CVGS.csprojAssemblyReference.cache
 C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\obj\Debug\CVGS.csproj.CoreCompileInputs.cache
 C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\obj\Debug\CVGS.csproj.CopyComplete
 C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\obj\Debug\CVGS.dll
@@ -636,3 +635,6 @@ C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS
 C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\bin\Newtonsoft.Json.Bson.xml
 C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\bin\System.Collections.Immutable.xml
 C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\bin\System.Reflection.Metadata.xml
+C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\bin\itextsharp.dll
+C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\bin\itextsharp.xml
+C:\Users\Kyle\Documents\Conestoga Year 3\enterprise\eventTest\PROG3050\CVGS\CVGS\obj\Debug\CVGS.csprojAssemblyReference.cache

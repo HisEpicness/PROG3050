@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="363053808e1f416f880ec7ae8ca34bfa" Name="Diagram1">
+        <EntityTypeShape EntityType="CVGSModel.esrb_rating" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVGSModel.eventData" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVGSModel.game" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVGSModel.genre" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVGSModel.login" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVGSModel.order" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVGSModel.user" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CVGSModel.wishList" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="CVGSModel.FK__game__rating__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="CVGSModel.FK__event__createdBy__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="CVGSModel.FK__game__genre__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="CVGSModel.FK__game__genre__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="CVGSModel.FK__orders__gameId__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="CVGSModel.FK__wishList__gameId__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="CVGSModel.FK__login__username__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="CVGSModel.FK__orders__username__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="CVGSModel.FK__wishList__userna__5070F446" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

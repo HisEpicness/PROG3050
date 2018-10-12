@@ -24,12 +24,15 @@
                 @Html.ActionLink("CVGS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                @*<ul class="nav navbar-nav">*@
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="">Home</a></li>
+                        <li><a runat="server" href="~/Default">Home</a></li>
                         <li><a href="/Event/Index">Events</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                        <li><a runat="server" href="/Game/Index">Games</a></li>
+                        @if (Session["Emp"] != null)
+	                    {
+                        <li><a runat="server" href="~/Reports">Reports</a></li>
+	                    }   
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello: @Session["User"]!</a></li>
@@ -37,7 +40,7 @@
                             <a runat="server" href="~/Account/Login" onserverclick="LoggingOut">Log Out</a>
                         </li>
                     </ul>
-                </ul>
+                @*</ul>*@
             </div>
         </div>
     </div>

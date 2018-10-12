@@ -74,6 +74,7 @@
     </Key>
     <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="gameId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="dateAdded" Type="date" />
   </EntityType>
   <Association Name="FK__event__createdBy__4D94879B">
     <End Role="user" Type="Self.user" Multiplicity="1" />

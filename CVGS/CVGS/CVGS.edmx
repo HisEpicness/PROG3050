@@ -79,6 +79,7 @@
           </Key>
           <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="gameId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dateAdded" Type="date" />
         </EntityType>
         <Association Name="FK__event__createdBy__4D94879B">
           <End Role="user" Type="Self.user" Multiplicity="1" />
@@ -274,7 +275,7 @@
           <NavigationProperty Name="genre1" Relationship="Self.FK__game__genre__49C3F6B7" FromRole="game" ToRole="genre" />
           <NavigationProperty Name="genre2" Relationship="Self.FK__game__genre__4BAC3F29" FromRole="game" ToRole="genre" />
           <NavigationProperty Name="orders" Relationship="Self.FK__orders__gameId__4F7CD00D" FromRole="game" ToRole="orders" />
-          <NavigationProperty Name="users" Relationship="Self.wishList" FromRole="game" ToRole="user" />
+          <NavigationProperty Name="wishLists" Relationship="Self.FK__wishList__gameId__5165187F" FromRole="game" ToRole="wishList" />
         </EntityType>
         <EntityType Name="genre">
           <Key>
@@ -320,7 +321,18 @@
           <NavigationProperty Name="eventDatas" Relationship="Self.FK__event__createdBy__4D94879B" FromRole="user" ToRole="eventData" />
           <NavigationProperty Name="login" Relationship="Self.FK__login__username__5AEE82B9" FromRole="user" ToRole="login" />
           <NavigationProperty Name="orders" Relationship="Self.FK__orders__username__4E88ABD4" FromRole="user" ToRole="orders" />
-          <NavigationProperty Name="games" Relationship="Self.wishList" FromRole="user" ToRole="game" />
+          <NavigationProperty Name="wishLists" Relationship="Self.FK__wishList__userna__5070F446" FromRole="user" ToRole="wishList" />
+        </EntityType>
+        <EntityType Name="wishList">
+          <Key>
+            <PropertyRef Name="username" />
+            <PropertyRef Name="gameId" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gameId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dateAdded" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="game" Relationship="Self.FK__wishList__gameId__5165187F" FromRole="wishList" ToRole="game" />
+          <NavigationProperty Name="user" Relationship="Self.FK__wishList__userna__5070F446" FromRole="wishList" ToRole="user" />
         </EntityType>
         <Association Name="FK__game__rating__4CA06362">
           <End Role="esrb_rating" Type="Self.esrb_rating" Multiplicity="0..1" />
@@ -382,6 +394,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__wishList__gameId__5165187F">
+          <End Role="game" Type="Self.game" Multiplicity="1" />
+          <End Role="wishList" Type="Self.wishList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="game">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="wishList">
+              <PropertyRef Name="gameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__login__username__5AEE82B9">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="login" Type="Self.login" Multiplicity="0..1" />
@@ -406,9 +430,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="wishList">
-          <End Role="game" Type="Self.game" Multiplicity="*" />
-          <End Role="user" Type="Self.user" Multiplicity="*" />
+        <Association Name="FK__wishList__userna__5070F446">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="wishList" Type="Self.wishList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="wishList">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CVGSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="esrb_rating" EntityType="Self.esrb_rating" />
@@ -418,6 +450,7 @@
           <EntitySet Name="logins" EntityType="Self.login" />
           <EntitySet Name="orders" EntityType="Self.order" />
           <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="wishLists" EntityType="Self.wishList" />
           <AssociationSet Name="FK__game__rating__4CA06362" Association="Self.FK__game__rating__4CA06362">
             <End Role="esrb_rating" EntitySet="esrb_rating" />
             <End Role="game" EntitySet="games" />
@@ -438,6 +471,10 @@
             <End Role="game" EntitySet="games" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
+          <AssociationSet Name="FK__wishList__gameId__5165187F" Association="Self.FK__wishList__gameId__5165187F">
+            <End Role="game" EntitySet="games" />
+            <End Role="wishList" EntitySet="wishLists" />
+          </AssociationSet>
           <AssociationSet Name="FK__login__username__5AEE82B9" Association="Self.FK__login__username__5AEE82B9">
             <End Role="user" EntitySet="users" />
             <End Role="login" EntitySet="logins" />
@@ -446,9 +483,9 @@
             <End Role="user" EntitySet="users" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
-          <AssociationSet Name="wishList" Association="Self.wishList">
-            <End Role="game" EntitySet="games" />
+          <AssociationSet Name="FK__wishList__userna__5070F446" Association="Self.FK__wishList__userna__5070F446">
             <End Role="user" EntitySet="users" />
+            <End Role="wishList" EntitySet="wishLists" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -531,14 +568,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="wishList" TypeName="CVGSModel.wishList" StoreEntitySet="wishList">
-            <EndProperty Name="game">
-              <ScalarProperty Name="id" ColumnName="gameId" />
-            </EndProperty>
-            <EndProperty Name="user">
-              <ScalarProperty Name="username" ColumnName="username" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="wishLists">
+            <EntityTypeMapping TypeName="CVGSModel.wishList">
+              <MappingFragment StoreEntitySet="wishList">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="gameId" ColumnName="gameId" />
+                <ScalarProperty Name="dateAdded" ColumnName="dateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

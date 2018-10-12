@@ -84,6 +84,13 @@ namespace CVGS.Account
                     .Select(s => new UserModel()
                     {
                         username = s.username,
+                        firstName = s.firstName, 
+                        lastname = s.lastname,
+                        email  = s.email,
+                        mailAddress = s.mailAddress,
+                        shipAddress  = s.shipAddress,
+                        age  = s.age,
+                        employee = s.employee,
                     }).FirstOrDefault<UserModel>();
             }
 
