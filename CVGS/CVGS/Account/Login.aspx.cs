@@ -36,7 +36,7 @@ namespace CVGS.Account
                 switch (result)
                 {
                     case true:
-                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                        Response.Redirect("~/Default");
                         break;
                     case false:
                     default:
