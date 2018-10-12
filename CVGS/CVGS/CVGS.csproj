@@ -589,14 +589,6 @@
     <Content Include="CVGS.edmx.diagram">
       <DependentUpon>CVGS.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\MVC\Views\web.config" />
-    <Content Include="Areas\MVC\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\MVC\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\MVC\Views\Event\Index.cshtml" />
-    <Content Include="Areas\MVC\Views\Event\Create.cshtml" />
-    <Content Include="Areas\MVC\Views\Event\Edit.cshtml" />
-    <Content Include="Areas\MVC\Views\Event\Delete.cshtml" />
-    <Content Include="Areas\MVC\Views\Event\View.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -752,10 +744,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\MVC\Controllers\EventController.cs" />
-    <Compile Include="Areas\MVC\Models\Event.cs" />
-    <Compile Include="Areas\MVC\Models\Metadata\EventMetadata.cs" />
-    <Compile Include="Areas\MVC\MVCAreaRegistration.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -763,6 +751,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="CVGS.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -788,7 +777,7 @@
     <Compile Include="esrb_rating.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
-    <Compile Include="event.cs">
+    <Compile Include="eventData.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
     <Compile Include="game.cs">
@@ -803,8 +792,10 @@
     <Compile Include="login.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Metadata\EventMetadata.cs" />
     <Compile Include="order.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
@@ -844,13 +835,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Unauthorized.Master" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Event\Create.cshtml" />
+    <Content Include="Views\Event\Delete.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
+    <Content Include="Views\Event\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
