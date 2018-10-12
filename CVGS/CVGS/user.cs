@@ -24,7 +24,7 @@ namespace CVGS
     
         public string username { get; set; }
         public string firstName { get; set; }
-        public string lastname { get; set; }
+        public string lastName { get; set; }
         public string email { get; set; }
         public string mailAddress { get; set; }
         public string shipAddress { get; set; }

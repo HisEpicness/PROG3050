@@ -85,7 +85,7 @@ namespace CVGS.Account
                     {
                         username = s.username,
                         firstName = s.firstName, 
-                        lastname = s.lastname,
+                        lastname = s.lastName,
                         email  = s.email,
                         mailAddress = s.mailAddress,
                         shipAddress  = s.shipAddress,

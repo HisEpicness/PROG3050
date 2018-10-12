@@ -87,7 +87,7 @@ namespace CVGS.Account
             usr.username = uName;
             usr.email = email;
             usr.firstName = fName;
-            usr.lastname = lName;
+            usr.lastName = lName;
             usr.mailAddress = null;
             usr.shipAddress = null;
             usr.age = age;

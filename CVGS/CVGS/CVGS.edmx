@@ -65,7 +65,7 @@
           </Key>
           <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="lastname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="mailAddress" Type="varchar" MaxLength="50" />
           <Property Name="shipAddress" Type="varchar" MaxLength="50" />
@@ -312,7 +312,7 @@
           </Key>
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="mailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="shipAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -559,7 +559,7 @@
               <MappingFragment StoreEntitySet="user">
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="mailAddress" ColumnName="mailAddress" />
                 <ScalarProperty Name="shipAddress" ColumnName="shipAddress" />

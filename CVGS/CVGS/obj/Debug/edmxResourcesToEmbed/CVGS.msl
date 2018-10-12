@@ -66,7 +66,7 @@
         <MappingFragment StoreEntitySet="user">
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="firstName" ColumnName="firstName" />
-          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="mailAddress" ColumnName="mailAddress" />
           <ScalarProperty Name="shipAddress" ColumnName="shipAddress" />

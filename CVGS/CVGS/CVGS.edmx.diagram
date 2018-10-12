@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="363053808e1f416f880ec7ae8ca34bfa" Name="Diagram1">
+      <Diagram DiagramId="6c705e4299804273a476b63e1c2fafe1" Name="Diagram1">
         <EntityTypeShape EntityType="CVGSModel.esrb_rating" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="CVGSModel.eventData" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CVGSModel.game" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />

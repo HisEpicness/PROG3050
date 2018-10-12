@@ -95,7 +95,7 @@ namespace CVGS
                 {
                     users = context.users.Select(s => new user()
                     {
-                        username = s.firstName + ' ' + s.lastname
+                        username = s.firstName + ' ' + s.lastName
                     }).ToList<user>();
                 }
                 dt.Columns.Add("Name", typeof(string));
@@ -114,7 +114,7 @@ namespace CVGS
                     {
                         username = s.username,
                         firstName = s.firstName,
-                        lastname = s.lastname,
+                        lastName = s.lastName,
                         email = s.email,
                         age = s.age
                     }).ToList<user>();
@@ -128,7 +128,7 @@ namespace CVGS
 
                 foreach (user row in users)
                 {
-                    dt.Rows.Add(row.username.ToString(), row.firstName.ToString(), row.lastname.ToString(),
+                    dt.Rows.Add(row.username.ToString(), row.firstName.ToString(), row.lastName.ToString(),
                         row.email.ToString(), row.age.ToString());
                 }
             }

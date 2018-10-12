@@ -40,8 +40,8 @@ namespace CVGS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var events = _context.eventDatas
-                .SingleOrDefault(a => a.eventId == id);
+            var events = _context.eventDatas.Find(id);
+            //.SingleOrDefault(a => a.eventId == id);
 
             if (events == null)
             {
@@ -60,13 +60,13 @@ namespace CVGS.Controllers
         //POST: Event/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> Create(eventData eventDatas)
+        public ActionResult Create([Bind(Include = "eventId, name, date, createdBy, description")]eventData eventDatas)
         {
             eventDatas.createdBy = Session["User"].ToString();
             if (ModelState.IsValid)
             {
                 _context.eventDatas.Add(eventDatas);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(eventDatas);
@@ -91,24 +91,18 @@ namespace CVGS.Controllers
         //POST: Event/Edit/id
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> Edit(int? id, eventData eventDatas)
+        public ActionResult Edit(int id, [Bind(Include = "eventId, name, date, createdBy, description")] eventData eventDatas)
         {
             eventDatas.createdBy = Session["User"].ToString();
-
-            if (id != eventDatas.eventId)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             if (ModelState.IsValid)
             {
                 //_context.events.Update(events);
                 var oldEvent = _context.eventDatas.SingleOrDefault(a => a.eventId == id);
                 _context.eventDatas.Remove(oldEvent);
-
                 _context.eventDatas.Add(eventDatas);
 
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(eventDatas);
@@ -135,12 +129,11 @@ namespace CVGS.Controllers
         //POST: Event/Delete/id
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<ActionResult> DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            var events = _context.eventDatas.SingleOrDefault(a => a.eventId == id);
+            eventData events = _context.eventDatas.Find(id);
             _context.eventDatas.Remove(events);
-
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 

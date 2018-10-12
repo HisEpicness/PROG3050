@@ -16,6 +16,7 @@ namespace CVGS
     {
         public string username { get; set; }
         public decimal gameId { get; set; }
+        public Nullable<System.DateTime> dateAdded { get; set; }
     
         public virtual game game { get; set; }
         public virtual user user { get; set; }

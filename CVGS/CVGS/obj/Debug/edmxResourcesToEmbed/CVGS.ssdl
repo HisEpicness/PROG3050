@@ -60,7 +60,7 @@
     </Key>
     <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="lastname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="mailAddress" Type="varchar" MaxLength="50" />
     <Property Name="shipAddress" Type="varchar" MaxLength="50" />
