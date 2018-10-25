@@ -92,6 +92,12 @@ namespace CVGS.Account
             usr.shipAddress = null;
             usr.age = age;
             usr.employee = isEmployee;
+            usr.favGenre = null;
+            usr.favGenre2 = null;
+            usr.favPlatform = null;
+            usr.favPlatform2 = null;
+            usr.promoEmails = true;
+            usr.publicWishlist = true;
 
             login log = new login();
             log.username = uName;

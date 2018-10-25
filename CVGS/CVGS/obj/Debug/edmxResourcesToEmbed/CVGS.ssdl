@@ -54,6 +54,13 @@
     <Property Name="orderDate" Type="date" Nullable="false" />
     <Property Name="shipDate" Type="date" />
   </EntityType>
+  <EntityType Name="platform">
+    <Key>
+      <PropertyRef Name="platformId" />
+    </Key>
+    <Property Name="platformId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="platformName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="user">
     <Key>
       <PropertyRef Name="username" />
@@ -66,6 +73,12 @@
     <Property Name="shipAddress" Type="varchar" MaxLength="50" />
     <Property Name="age" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="employee" Type="bit" />
+    <Property Name="favPlatform" Type="varchar" MaxLength="50" />
+    <Property Name="favPlatform2" Type="varchar" MaxLength="50" />
+    <Property Name="favGenre" Type="char" MaxLength="10" />
+    <Property Name="favGenre2" Type="char" MaxLength="10" />
+    <Property Name="promoEmails" Type="bit" Nullable="false" />
+    <Property Name="publicWishlist" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="wishList">
     <Key>
@@ -160,6 +173,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__user__favGenre__72C60C4A">
+    <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="genre">
+        <PropertyRef Name="genreKey" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="favGenre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user__favGenre2__71D1E811">
+    <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="genre">
+        <PropertyRef Name="genreKey" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="favGenre2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user__favPlatfor__6FE99F9F">
+    <End Role="platform" Type="Self.platform" Multiplicity="0..1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="platform">
+        <PropertyRef Name="platformId" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="favPlatform" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__user__favPlatfor__70DDC3D8">
+    <End Role="platform" Type="Self.platform" Multiplicity="0..1" />
+    <End Role="user" Type="Self.user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="platform">
+        <PropertyRef Name="platformId" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="favPlatform2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__wishList__gameId__5165187F">
     <End Role="game" Type="Self.game" Multiplicity="1" />
     <End Role="wishList" Type="Self.wishList" Multiplicity="*" />
@@ -191,6 +252,7 @@
     <EntitySet Name="genre" EntityType="Self.genre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="platform" EntityType="Self.platform" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="wishList" EntityType="Self.wishList" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__event__createdBy__4D94879B" Association="Self.FK__event__createdBy__4D94879B">
@@ -220,6 +282,22 @@
     <AssociationSet Name="FK__orders__username__4E88ABD4" Association="Self.FK__orders__username__4E88ABD4">
       <End Role="user" EntitySet="user" />
       <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user__favGenre__72C60C4A" Association="Self.FK__user__favGenre__72C60C4A">
+      <End Role="genre" EntitySet="genre" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user__favGenre2__71D1E811" Association="Self.FK__user__favGenre2__71D1E811">
+      <End Role="genre" EntitySet="genre" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user__favPlatfor__6FE99F9F" Association="Self.FK__user__favPlatfor__6FE99F9F">
+      <End Role="platform" EntitySet="platform" />
+      <End Role="user" EntitySet="user" />
+    </AssociationSet>
+    <AssociationSet Name="FK__user__favPlatfor__70DDC3D8" Association="Self.FK__user__favPlatfor__70DDC3D8">
+      <End Role="platform" EntitySet="platform" />
+      <End Role="user" EntitySet="user" />
     </AssociationSet>
     <AssociationSet Name="FK__wishList__gameId__5165187F" Association="Self.FK__wishList__gameId__5165187F">
       <End Role="game" EntitySet="game" />

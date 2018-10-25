@@ -1,0 +1,139 @@
+﻿@model CVGS.user
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>user</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+        @if (Model.username == Session["User"].ToString())
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.mailAddress)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.mailAddress)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.shipAddress)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.shipAddress)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.age)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.age)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.employee)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.employee)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.promoEmails)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.promoEmails)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.publicWishlist)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.publicWishlist)
+            </dd>
+
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.favPlatform)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.favPlatform)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.favPlatform2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.favPlatform2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.favGenre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.favGenre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.favGenre2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.favGenre2)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (Model.username == Session["User"].ToString())
+    {
+        @Html.ActionLink("Edit Profile", "Edit", new { id = Model.username });
+
+        //change password link
+    }
+                                                                     
+    @Html.ActionLink("Back to List", "Index")
+</p>

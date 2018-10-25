@@ -61,6 +61,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="platforms">
+      <EntityTypeMapping TypeName="CVGSModel.platform">
+        <MappingFragment StoreEntitySet="platform">
+          <ScalarProperty Name="platformId" ColumnName="platformId" />
+          <ScalarProperty Name="platformName" ColumnName="platformName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="users">
       <EntityTypeMapping TypeName="CVGSModel.user">
         <MappingFragment StoreEntitySet="user">
@@ -72,6 +80,12 @@
           <ScalarProperty Name="shipAddress" ColumnName="shipAddress" />
           <ScalarProperty Name="age" ColumnName="age" />
           <ScalarProperty Name="employee" ColumnName="employee" />
+          <ScalarProperty Name="favPlatform" ColumnName="favPlatform" />
+          <ScalarProperty Name="favPlatform2" ColumnName="favPlatform2" />
+          <ScalarProperty Name="favGenre" ColumnName="favGenre" />
+          <ScalarProperty Name="favGenre2" ColumnName="favGenre2" />
+          <ScalarProperty Name="promoEmails" ColumnName="promoEmails" />
+          <ScalarProperty Name="publicWishlist" ColumnName="publicWishlist" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
