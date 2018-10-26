@@ -16,3 +16,6 @@ Employee:
 
 Username: emp01 
 Password: password
+
+
+For reset password to work you must create a user who has a valid e-mail address to the verification code can be sent properly.

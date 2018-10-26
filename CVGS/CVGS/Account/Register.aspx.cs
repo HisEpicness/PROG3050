@@ -24,8 +24,6 @@ namespace CVGS.Account
 {
     public partial class Register : Page
     {
-        private static SqlDataReader dr;
-        private static DataTable dt;
 
         protected void CreateUser_Click(object sender, EventArgs e)
         {

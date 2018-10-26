@@ -31,6 +31,7 @@ namespace CVGS
         public virtual DbSet<genre> genres { get; set; }
         public virtual DbSet<login> logins { get; set; }
         public virtual DbSet<order> orders { get; set; }
+        public virtual DbSet<passReset> passResets { get; set; }
         public virtual DbSet<platform> platforms { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<wishList> wishLists { get; set; }

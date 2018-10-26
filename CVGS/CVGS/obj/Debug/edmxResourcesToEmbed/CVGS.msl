@@ -61,6 +61,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="passResets">
+      <EntityTypeMapping TypeName="CVGSModel.passReset">
+        <MappingFragment StoreEntitySet="passReset">
+          <ScalarProperty Name="resetCode" ColumnName="resetCode" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="platforms">
       <EntityTypeMapping TypeName="CVGSModel.platform">
         <MappingFragment StoreEntitySet="platform">

@@ -19,7 +19,7 @@
     @Html.HiddenFor(model => model.employee)
 
     <div class="form-group">
-        @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.firstName, "First Name", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
@@ -27,7 +27,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.lastName, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.lastName, "Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
@@ -35,7 +35,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.email, "E-Mail", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
@@ -43,7 +43,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.mailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.mailAddress, "Mailing Address", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.mailAddress, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.mailAddress, "", new { @class = "text-danger" })
@@ -51,7 +51,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.shipAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.shipAddress, "Shipping Address", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.shipAddress, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.shipAddress, "", new { @class = "text-danger" })
@@ -59,7 +59,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.age, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.age, "Age", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.age, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.age, "", new { @class = "text-danger" })
@@ -67,7 +67,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.promoEmails, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.promoEmails, "Do you wish to receive promotional e-mails?", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
                 @Html.EditorFor(model => model.promoEmails)
@@ -77,7 +77,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.publicWishlist, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.publicWishlist, "Do you want your wishlist public?", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
                 @Html.EditorFor(model => model.publicWishlist)
@@ -87,7 +87,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.favPlatform, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.favPlatform, "Favorite platfrom", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.favPlatform, (SelectList)ViewBag.favPlatform, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.favPlatform, "", new { @class = "text-danger" })
@@ -96,7 +96,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.favPlatform2, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.favPlatform2, "Second favorite platform", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.favPlatform2, (SelectList)ViewBag.favPlatform2, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.favPlatform2, "", new { @class = "text-danger" })
@@ -105,7 +105,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.favGenre, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.favGenre, "Favorite genre", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.favGenre, (SelectList)ViewBag.favGenre, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.favGenre, "", new { @class = "text-danger" })
@@ -114,7 +114,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.favGenre2, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.favGenre2, "Second favorite genre", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.favGenre2, (SelectList)ViewBag.favGenre2, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.favGenre2, "", new { @class = "text-danger" })

@@ -54,6 +54,13 @@
     <Property Name="orderDate" Type="date" Nullable="false" />
     <Property Name="shipDate" Type="date" />
   </EntityType>
+  <EntityType Name="passReset">
+    <Key>
+      <PropertyRef Name="resetCode" />
+    </Key>
+    <Property Name="resetCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="platform">
     <Key>
       <PropertyRef Name="platformId" />
@@ -173,6 +180,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__passReset__usern__76969D2E">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="passReset" Type="Self.passReset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="passReset">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__user__favGenre__72C60C4A">
     <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
     <End Role="user" Type="Self.user" Multiplicity="*" />
@@ -252,6 +271,7 @@
     <EntitySet Name="genre" EntityType="Self.genre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="passReset" EntityType="Self.passReset" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="platform" EntityType="Self.platform" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="wishList" EntityType="Self.wishList" Schema="dbo" store:Type="Tables" />
@@ -282,6 +302,10 @@
     <AssociationSet Name="FK__orders__username__4E88ABD4" Association="Self.FK__orders__username__4E88ABD4">
       <End Role="user" EntitySet="user" />
       <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__passReset__usern__76969D2E" Association="Self.FK__passReset__usern__76969D2E">
+      <End Role="user" EntitySet="user" />
+      <End Role="passReset" EntitySet="passReset" />
     </AssociationSet>
     <AssociationSet Name="FK__user__favGenre__72C60C4A" Association="Self.FK__user__favGenre__72C60C4A">
       <End Role="genre" EntitySet="genre" />

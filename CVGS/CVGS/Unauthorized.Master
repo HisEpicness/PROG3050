@@ -70,6 +70,9 @@
                             <%else{ %>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Session["User"]  %> !</a></li>
+                                <%--<li><% Html.ActionLink("View Profile", "Details", new { id = Session["User"].ToString() })%></li>--%>
+                                <%--<li><a runat="server" href="/User/Details(emp01)">Users</a></li>--%>
+
                                 <li>
                                     <a runat="server" href="~/Account/Login" onserverclick="LoggingOut">Log Out</a>
                                 </li>

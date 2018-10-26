@@ -11,7 +11,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.username)
+            Username
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.firstName)
+            First Name
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.lastName)
+            Last Name
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.email)
+            E-Mail
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         @if (Model.username == Session["User"].ToString())
         {
             <dt>
-                @Html.DisplayNameFor(model => model.mailAddress)
+                Mailing Address
             </dt>
 
             <dd>
@@ -52,7 +52,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.shipAddress)
+                Ship Address
             </dt>
 
             <dd>
@@ -60,7 +60,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.age)
+                Age
             </dt>
 
             <dd>
@@ -68,15 +68,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.employee)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.employee)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.promoEmails)
+                Do you receive promotional e-mails?
             </dt>
 
             <dd>
@@ -84,7 +76,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.publicWishlist)
+                Is your wishlist public?
             </dt>
 
             <dd>
@@ -94,7 +86,7 @@
         }
 
         <dt>
-            @Html.DisplayNameFor(model => model.favPlatform)
+            Favorite platform
         </dt>
 
         <dd>
@@ -102,7 +94,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.favPlatform2)
+            Second favorite platform
         </dt>
 
         <dd>
@@ -110,7 +102,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.favGenre)
+            Favorite genre
         </dt>
 
         <dd>
@@ -118,7 +110,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.favGenre2)
+            second favorite genre
         </dt>
 
         <dd>
@@ -131,8 +123,9 @@
     @if (Model.username == Session["User"].ToString())
     {
         @Html.ActionLink("Edit Profile", "Edit", new { id = Model.username });
-
-        //change password link
+        <br />
+        <a runat="server" href="~/Account/ChangePassword">Change Password</a>
+        <br />
     }
                                                                      
     @Html.ActionLink("Back to List", "Index")

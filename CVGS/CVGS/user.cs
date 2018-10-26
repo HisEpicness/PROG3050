@@ -20,6 +20,7 @@ namespace CVGS
             this.eventDatas = new HashSet<eventData>();
             this.orders = new HashSet<order>();
             this.wishLists = new HashSet<wishList>();
+            this.passResets = new HashSet<passReset>();
         }
     
         public string username { get; set; }
@@ -44,9 +45,12 @@ namespace CVGS
         public virtual login login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }
+        public virtual passReset passReset { get; set; }
         public virtual platform platform { get; set; }
         public virtual platform platform1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<wishList> wishLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<passReset> passResets { get; set; }
     }
 }

@@ -5,6 +5,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using CVGS.Models;
+using System.Security.Cryptography;
+using System.Text;
+using System.Linq;
 
 namespace CVGS.Account
 {
@@ -16,25 +19,76 @@ namespace CVGS.Account
 
         protected void Forgot(object sender, EventArgs e)
         {
-            if (IsValid)
+            String email = email = Email.Text.Trim();
+            String code = GetUniqueKey(6);
+
+            UserModel login = null;
+
+            using (var ctx = new CVGSEntities())
             {
-                // Validate the user's email address
-                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                ApplicationUser user = manager.FindByName(Email.Text);
-                if (user == null || !manager.IsEmailConfirmed(user.Id))
-                {
-                    FailureText.Text = "The user either does not exist or is not confirmed.";
-                    ErrorMessage.Visible = true;
-                    return;
-                }
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send email with the code and the redirect to reset password page
-                //string code = manager.GeneratePasswordResetToken(user.Id);
-                //string callbackUrl = IdentityHelper.GetResetPasswordRedirectUrl(code, Request);
-                //manager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>.");
-                loginForm.Visible = false;
-                DisplayEmail.Visible = true;
+                login = ctx.users
+                    .Where(s => s.email == email)
+                    .Select(s => new UserModel()
+                    {
+                        username = s.username,
+                        firstName = s.firstName,
+                        lastname = s.lastName,
+                        email = s.email,
+                        mailAddress = s.mailAddress,
+                        shipAddress = s.shipAddress,
+                        age = s.age,
+                        employee = s.employee,
+                    }).FirstOrDefault<UserModel>();
             }
+
+            passReset resetPass = new passReset();
+            resetPass.resetCode = code;
+            resetPass.username = login.username;
+
+            using (var ctx = new CVGSEntities())
+            {
+                if (ModelState.IsValid)
+                {
+                    ctx.passResets.Add(resetPass);
+                    ctx.SaveChanges();
+                }
+            }
+
+
+            System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
+            message.To.Add(email);
+            message.Subject = "CVGS password reset code";
+            message.From = new System.Net.Mail.MailAddress("kyle-ept@hotmail.com");
+            message.Body = "Please enter the following code on the reset password page of CVGS: "
+                + code;
+            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("smtp-mail.outlook.com");
+            smtp.Port = 587;
+            smtp.Credentials = new System.Net.NetworkCredential("kyle-ept@hotmail.com", "");
+            smtp.EnableSsl = true;
+            smtp.Send(message);
+
+            Response.Redirect("~/Account/ResetPassword");
+
+        }
+
+        public static string GetUniqueKey(int maxSize)
+        {
+            char[] chars = new char[62];
+            chars =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
+            byte[] data = new byte[1];
+            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
+            {
+                crypto.GetNonZeroBytes(data);
+                data = new byte[maxSize];
+                crypto.GetNonZeroBytes(data);
+            }
+            StringBuilder result = new StringBuilder(maxSize);
+            foreach (byte b in data)
+            {
+                result.Append(chars[b % (chars.Length)]);
+            }
+            return result.ToString();
         }
     }
 }
