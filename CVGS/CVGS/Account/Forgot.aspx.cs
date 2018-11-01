@@ -58,12 +58,12 @@ namespace CVGS.Account
             System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
             message.To.Add(email);
             message.Subject = "CVGS password reset code";
-            message.From = new System.Net.Mail.MailAddress("kyle-ept@hotmail.com");
+            message.From = new System.Net.Mail.MailAddress("TeamSiXCVGS@outlook.com");
             message.Body = "Please enter the following code on the reset password page of CVGS: "
                 + code;
             System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("smtp-mail.outlook.com");
             smtp.Port = 587;
-            smtp.Credentials = new System.Net.NetworkCredential("kyle-ept@hotmail.com", "");
+            smtp.Credentials = new System.Net.NetworkCredential("TeamSiXCVGS@outlook.com", "CVGSPassword");
             smtp.EnableSsl = true;
             smtp.Send(message);
 
