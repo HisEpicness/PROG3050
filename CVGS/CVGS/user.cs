@@ -20,6 +20,7 @@ namespace CVGS
             this.eventDatas = new HashSet<eventData>();
             this.orders = new HashSet<order>();
             this.wishLists = new HashSet<wishList>();
+            this.passResets = new HashSet<passReset>();
         }
     
         public string username { get; set; }
@@ -30,13 +31,26 @@ namespace CVGS
         public string shipAddress { get; set; }
         public decimal age { get; set; }
         public Nullable<bool> employee { get; set; }
+        public string favPlatform { get; set; }
+        public string favPlatform2 { get; set; }
+        public string favGenre { get; set; }
+        public string favGenre2 { get; set; }
+        public bool promoEmails { get; set; }
+        public bool publicWishlist { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<eventData> eventDatas { get; set; }
+        public virtual genre genre { get; set; }
+        public virtual genre genre1 { get; set; }
         public virtual login login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }
+        public virtual passReset passReset { get; set; }
+        public virtual platform platform { get; set; }
+        public virtual platform platform1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<wishList> wishLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<passReset> passResets { get; set; }
     }
 }

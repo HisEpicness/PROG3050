@@ -11,36 +11,41 @@ namespace CVGS.Account
 {
     public partial class ResetPassword : Page
     {
-        protected string StatusMessage
-        {
-            get;
-            private set;
-        }
 
-        protected void Reset_Click(object sender, EventArgs e)
+        protected void ResetPass_Click(object sender, EventArgs e)
         {
-            string code = IdentityHelper.GetCodeFromRequest(Request);
-            if (code != null)
+            string code = Verification.Text.ToString();
+            string pass = Password.Text.ToString();
+
+
+            passReset reset = null;
+
+            using (var ctx = new CVGSEntities())
             {
-                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                reset = ctx.passResets
+                    .Where(s => s.resetCode == code).FirstOrDefault();
 
-                var user = manager.FindByName(Email.Text);
-                if (user == null)
+                if (reset != null)
                 {
-                    ErrorMessage.Text = "No user found";
-                    return;
-                }
-                var result = manager.ResetPassword(user.Id, code, Password.Text);
-                if (result.Succeeded)
-                {
-                    Response.Redirect("~/Account/ResetPasswordConfirmation");
-                    return;
-                }
-                ErrorMessage.Text = result.Errors.FirstOrDefault();
-                return;
-            }
+                    login log = new login();
+                    log.username = reset.username;
+                    log.password = pass;
 
-            ErrorMessage.Text = "An error has occurred";
+                    if (ModelState.IsValid)
+                    {
+                        ctx.Entry(log).State = System.Data.Entity.EntityState.Modified;
+                        ctx.SaveChanges();
+                        ctx.passResets.Remove(reset);
+                        ctx.SaveChanges();
+                    }
+
+                    Response.Redirect("~/Account/Login");
+                }
+                else
+                {
+                    ErrorMessage.Text = "Invalid Verification Code";
+                }
+            } 
         }
     }
 }

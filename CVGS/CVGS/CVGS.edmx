@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CVGSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CVGSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="esrb_rating">
           <Key>
             <PropertyRef Name="ratingCode" />
@@ -59,6 +59,20 @@
           <Property Name="orderDate" Type="date" Nullable="false" />
           <Property Name="shipDate" Type="date" />
         </EntityType>
+        <EntityType Name="passReset">
+          <Key>
+            <PropertyRef Name="resetCode" />
+          </Key>
+          <Property Name="resetCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="platform">
+          <Key>
+            <PropertyRef Name="platformId" />
+          </Key>
+          <Property Name="platformId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="platformName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="username" />
@@ -71,6 +85,12 @@
           <Property Name="shipAddress" Type="varchar" MaxLength="50" />
           <Property Name="age" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="employee" Type="bit" />
+          <Property Name="favPlatform" Type="varchar" MaxLength="50" />
+          <Property Name="favPlatform2" Type="varchar" MaxLength="50" />
+          <Property Name="favGenre" Type="char" MaxLength="10" />
+          <Property Name="favGenre2" Type="char" MaxLength="10" />
+          <Property Name="promoEmails" Type="bit" Nullable="false" />
+          <Property Name="publicWishlist" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="wishList">
           <Key>
@@ -165,6 +185,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__passReset__usern__76969D2E">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="passReset" Type="Self.passReset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="passReset">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user__favGenre__72C60C4A">
+          <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="genreKey" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="favGenre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user__favGenre2__71D1E811">
+          <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="genreKey" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="favGenre2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user__favPlatfor__6FE99F9F">
+          <End Role="platform" Type="Self.platform" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="platform">
+              <PropertyRef Name="platformId" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="favPlatform" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user__favPlatfor__70DDC3D8">
+          <End Role="platform" Type="Self.platform" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="platform">
+              <PropertyRef Name="platformId" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="favPlatform2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__wishList__gameId__5165187F">
           <End Role="game" Type="Self.game" Multiplicity="1" />
           <End Role="wishList" Type="Self.wishList" Multiplicity="*" />
@@ -196,6 +276,8 @@
           <EntitySet Name="genre" EntityType="Self.genre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="passReset" EntityType="Self.passReset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="platform" EntityType="Self.platform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wishList" EntityType="Self.wishList" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__event__createdBy__4D94879B" Association="Self.FK__event__createdBy__4D94879B">
@@ -226,6 +308,26 @@
             <End Role="user" EntitySet="user" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
+          <AssociationSet Name="FK__passReset__usern__76969D2E" Association="Self.FK__passReset__usern__76969D2E">
+            <End Role="user" EntitySet="user" />
+            <End Role="passReset" EntitySet="passReset" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user__favGenre__72C60C4A" Association="Self.FK__user__favGenre__72C60C4A">
+            <End Role="genre" EntitySet="genre" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user__favGenre2__71D1E811" Association="Self.FK__user__favGenre2__71D1E811">
+            <End Role="genre" EntitySet="genre" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user__favPlatfor__6FE99F9F" Association="Self.FK__user__favPlatfor__6FE99F9F">
+            <End Role="platform" EntitySet="platform" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user__favPlatfor__70DDC3D8" Association="Self.FK__user__favPlatfor__70DDC3D8">
+            <End Role="platform" EntitySet="platform" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
           <AssociationSet Name="FK__wishList__gameId__5165187F" Association="Self.FK__wishList__gameId__5165187F">
             <End Role="game" EntitySet="game" />
             <End Role="wishList" EntitySet="wishList" />
@@ -235,8 +337,7 @@
             <End Role="wishList" EntitySet="wishList" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CVGSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -285,6 +386,8 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="games" Relationship="Self.FK__game__genre__49C3F6B7" FromRole="genre" ToRole="game" />
           <NavigationProperty Name="games1" Relationship="Self.FK__game__genre__4BAC3F29" FromRole="genre" ToRole="game" />
+          <NavigationProperty Name="users" Relationship="Self.FK__user__favGenre__72C60C4A" FromRole="genre" ToRole="user" />
+          <NavigationProperty Name="users1" Relationship="Self.FK__user__favGenre2__71D1E811" FromRole="genre" ToRole="user" />
         </EntityType>
         <EntityType Name="login">
           <Key>
@@ -306,6 +409,24 @@
           <NavigationProperty Name="game" Relationship="Self.FK__orders__gameId__4F7CD00D" FromRole="orders" ToRole="game" />
           <NavigationProperty Name="user" Relationship="Self.FK__orders__username__4E88ABD4" FromRole="orders" ToRole="user" />
         </EntityType>
+        <EntityType Name="passReset">
+          <Key>
+            <PropertyRef Name="resetCode" />
+          </Key>
+          <Property Name="resetCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK__passReset__reset__75A278F5" FromRole="passReset" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="CVGSModel.FK__passReset__usern__76969D2E" FromRole="passReset" ToRole="user" />
+        </EntityType>
+        <EntityType Name="platform">
+          <Key>
+            <PropertyRef Name="platformId" />
+          </Key>
+          <Property Name="platformId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="platformName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK__user__favPlatfor__6FE99F9F" FromRole="platform" ToRole="user" />
+          <NavigationProperty Name="users1" Relationship="Self.FK__user__favPlatfor__70DDC3D8" FromRole="platform" ToRole="user" />
+        </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="username" />
@@ -318,10 +439,22 @@
           <Property Name="shipAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="age" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="employee" Type="Boolean" />
+          <Property Name="favPlatform" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="favPlatform2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="favGenre" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="favGenre2" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="promoEmails" Type="Boolean" Nullable="false" />
+          <Property Name="publicWishlist" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="eventDatas" Relationship="Self.FK__event__createdBy__4D94879B" FromRole="user" ToRole="eventData" />
+          <NavigationProperty Name="genre" Relationship="Self.FK__user__favGenre__72C60C4A" FromRole="user" ToRole="genre" />
+          <NavigationProperty Name="genre1" Relationship="Self.FK__user__favGenre2__71D1E811" FromRole="user" ToRole="genre" />
           <NavigationProperty Name="login" Relationship="Self.FK__login__username__5AEE82B9" FromRole="user" ToRole="login" />
           <NavigationProperty Name="orders" Relationship="Self.FK__orders__username__4E88ABD4" FromRole="user" ToRole="orders" />
+          <NavigationProperty Name="passReset" Relationship="Self.FK__passReset__reset__75A278F5" FromRole="user" ToRole="passReset" />
+          <NavigationProperty Name="platform" Relationship="Self.FK__user__favPlatfor__6FE99F9F" FromRole="user" ToRole="platform" />
+          <NavigationProperty Name="platform1" Relationship="Self.FK__user__favPlatfor__70DDC3D8" FromRole="user" ToRole="platform" />
           <NavigationProperty Name="wishLists" Relationship="Self.FK__wishList__userna__5070F446" FromRole="user" ToRole="wishList" />
+          <NavigationProperty Name="passResets" Relationship="CVGSModel.FK__passReset__usern__76969D2E" FromRole="user" ToRole="passReset" />
         </EntityType>
         <EntityType Name="wishList">
           <Key>
@@ -406,6 +539,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__user__favGenre__72C60C4A">
+          <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="genreKey" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="favGenre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user__favGenre2__71D1E811">
+          <End Role="genre" Type="Self.genre" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="genre">
+              <PropertyRef Name="genreKey" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="favGenre2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__login__username__5AEE82B9">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="login" Type="Self.login" Multiplicity="0..1" />
@@ -430,6 +587,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__passReset__reset__75A278F5">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="passReset" Type="Self.passReset" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="passReset">
+              <PropertyRef Name="resetCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user__favPlatfor__6FE99F9F">
+          <End Role="platform" Type="Self.platform" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="platform">
+              <PropertyRef Name="platformId" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="favPlatform" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user__favPlatfor__70DDC3D8">
+          <End Role="platform" Type="Self.platform" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="platform">
+              <PropertyRef Name="platformId" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="favPlatform2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__wishList__userna__5070F446">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="wishList" Type="Self.wishList" Multiplicity="*" />
@@ -449,6 +642,8 @@
           <EntitySet Name="genres" EntityType="Self.genre" />
           <EntitySet Name="logins" EntityType="Self.login" />
           <EntitySet Name="orders" EntityType="Self.order" />
+          <EntitySet Name="passResets" EntityType="Self.passReset" />
+          <EntitySet Name="platforms" EntityType="Self.platform" />
           <EntitySet Name="users" EntityType="Self.user" />
           <EntitySet Name="wishLists" EntityType="Self.wishList" />
           <AssociationSet Name="FK__game__rating__4CA06362" Association="Self.FK__game__rating__4CA06362">
@@ -475,6 +670,14 @@
             <End Role="game" EntitySet="games" />
             <End Role="wishList" EntitySet="wishLists" />
           </AssociationSet>
+          <AssociationSet Name="FK__user__favGenre__72C60C4A" Association="Self.FK__user__favGenre__72C60C4A">
+            <End Role="genre" EntitySet="genres" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user__favGenre2__71D1E811" Association="Self.FK__user__favGenre2__71D1E811">
+            <End Role="genre" EntitySet="genres" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
           <AssociationSet Name="FK__login__username__5AEE82B9" Association="Self.FK__login__username__5AEE82B9">
             <End Role="user" EntitySet="users" />
             <End Role="login" EntitySet="logins" />
@@ -483,11 +686,39 @@
             <End Role="user" EntitySet="users" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
+          <AssociationSet Name="FK__passReset__reset__75A278F5" Association="Self.FK__passReset__reset__75A278F5">
+            <End Role="user" EntitySet="users" />
+            <End Role="passReset" EntitySet="passResets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user__favPlatfor__6FE99F9F" Association="Self.FK__user__favPlatfor__6FE99F9F">
+            <End Role="platform" EntitySet="platforms" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user__favPlatfor__70DDC3D8" Association="Self.FK__user__favPlatfor__70DDC3D8">
+            <End Role="platform" EntitySet="platforms" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
           <AssociationSet Name="FK__wishList__userna__5070F446" Association="Self.FK__wishList__userna__5070F446">
             <End Role="user" EntitySet="users" />
             <End Role="wishList" EntitySet="wishLists" />
           </AssociationSet>
+          <AssociationSet Name="FK__passReset__usern__76969D2E" Association="CVGSModel.FK__passReset__usern__76969D2E">
+            <End Role="user" EntitySet="users" />
+            <End Role="passReset" EntitySet="passResets" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK__passReset__usern__76969D2E">
+          <End Type="CVGSModel.user" Role="user" Multiplicity="1" />
+          <End Type="CVGSModel.passReset" Role="passReset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="username" />
+            </Principal>
+            <Dependent Role="passReset">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -554,6 +785,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="passResets">
+            <EntityTypeMapping TypeName="CVGSModel.passReset">
+              <MappingFragment StoreEntitySet="passReset">
+                <ScalarProperty Name="resetCode" ColumnName="resetCode" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="platforms">
+            <EntityTypeMapping TypeName="CVGSModel.platform">
+              <MappingFragment StoreEntitySet="platform">
+                <ScalarProperty Name="platformId" ColumnName="platformId" />
+                <ScalarProperty Name="platformName" ColumnName="platformName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="CVGSModel.user">
               <MappingFragment StoreEntitySet="user">
@@ -565,6 +812,12 @@
                 <ScalarProperty Name="shipAddress" ColumnName="shipAddress" />
                 <ScalarProperty Name="age" ColumnName="age" />
                 <ScalarProperty Name="employee" ColumnName="employee" />
+                <ScalarProperty Name="favPlatform" ColumnName="favPlatform" />
+                <ScalarProperty Name="favPlatform2" ColumnName="favPlatform2" />
+                <ScalarProperty Name="favGenre" ColumnName="favGenre" />
+                <ScalarProperty Name="favGenre2" ColumnName="favGenre2" />
+                <ScalarProperty Name="promoEmails" ColumnName="promoEmails" />
+                <ScalarProperty Name="publicWishlist" ColumnName="publicWishlist" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

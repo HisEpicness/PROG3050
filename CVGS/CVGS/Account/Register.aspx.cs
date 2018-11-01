@@ -24,8 +24,6 @@ namespace CVGS.Account
 {
     public partial class Register : Page
     {
-        private static SqlDataReader dr;
-        private static DataTable dt;
 
         protected void CreateUser_Click(object sender, EventArgs e)
         {
@@ -92,6 +90,12 @@ namespace CVGS.Account
             usr.shipAddress = null;
             usr.age = age;
             usr.employee = isEmployee;
+            usr.favGenre = null;
+            usr.favGenre2 = null;
+            usr.favPlatform = null;
+            usr.favPlatform2 = null;
+            usr.promoEmails = true;
+            usr.publicWishlist = true;
 
             login log = new login();
             log.username = uName;
