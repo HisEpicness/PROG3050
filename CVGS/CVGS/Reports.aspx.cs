@@ -33,36 +33,38 @@ namespace CVGS
             }
             catch (Exception ex)
             {
-                ErrorMessage.Text = ex.InnerException.ToString();
+                ErrorMessage.Text = ex.Message;
             }
         }
 
         private DataTable getTable(int selectedIndex)
         {
             DataTable dt = new DataTable();
-
+            // Game List
             if (selectedIndex == 1)
             {
-                IList<game> games = null;
+                IList<GameModel> games = null;
                 using (var context = new CVGSEntities())
                 {
-                    games = context.games.Select(s => new game()
+                    games = context.games.Select(s => new GameModel()
                     {
                         name = s.name
-                    }).ToList<game>();
+                    }).ToList<GameModel>();
                 }
                 dt.Columns.Add("Name", typeof(string));
-                foreach (game row in games)
+                dt.Rows.Add("Name");
+                foreach (GameModel row in games)
                 {
                     dt.Rows.Add(row.name.ToString());
                 }
             }
+            // Game Detail
             else if (selectedIndex == 2)
             {
-                IList<game> games = null;
+                IList<GameModel> games = null;
                 using (var context = new CVGSEntities())
                 {
-                    games = context.games.Select(s => new game()
+                    games = context.games.Select(s => new GameModel()
                     {
                         name = s.name,
                         description = s.description,
@@ -71,7 +73,7 @@ namespace CVGS
                         genre = s.genre,
                         rating = s.rating,
                         price = s.price
-                    }).ToList<game>();
+                    }).ToList<GameModel>();
                 }
                 dt.Columns.Add("Name", typeof(string));
                 dt.Columns.Add("Description", typeof(string));
@@ -79,9 +81,9 @@ namespace CVGS
                 dt.Columns.Add("PublishDate", typeof(DateTime));
                 dt.Columns.Add("Genre", typeof(string));
                 dt.Columns.Add("Rating", typeof(string));
-                dt.Columns.Add("Price", typeof(Decimal));
+                dt.Columns.Add("Price", typeof(decimal));
 
-                foreach (game row in games)
+                foreach (GameModel row in games)
                 {
                     dt.Rows.Add(row.name.ToString(), row.description.ToString(), row.publisher.ToString(),
                         row.publishDate.ToString(), row.genre.ToString(), row.rating.ToString(), row.price.ToString());
@@ -90,91 +92,91 @@ namespace CVGS
             // Member List
             else if (selectedIndex == 3)
             {
-                IList<user> users = null;
+                IList<UserModel> users = null;
                 using (var context = new CVGSEntities())
                 {
-                    users = context.users.Select(s => new user()
+                    users = context.users.Select(s => new UserModel()
                     {
-                        username = s.firstName + ' ' + s.lastName
-                    }).ToList<user>();
+                        firstName = s.firstName,
+                        lastname = s.lastName
+                    }).ToList<UserModel>();
                 }
                 dt.Columns.Add("Name", typeof(string));
-                foreach (user user in users)
+                dt.Rows.Add("Name");
+                foreach (UserModel user in users)
                 {
-                    dt.Rows.Add(user.username.ToString());
+                    dt.Rows.Add(user.firstName.ToString()+' ' + user.lastname.ToString());
                 }
             }
             // Member Detail
             else if (selectedIndex == 4)
             {
-                IList<user> users = null;
+                IList<UserModel> users = null;
                 using (var context = new CVGSEntities())
                 {
-                    users = context.users.Select(s => new user()
+                    users = context.users.Select(s => new UserModel()
                     {
                         username = s.username,
                         firstName = s.firstName,
-                        lastName = s.lastName,
+                        lastname = s.lastName,
                         email = s.email,
                         age = s.age
-                    }).ToList<user>();
+                    }).ToList<UserModel>();
                 }
-
                 dt.Columns.Add("username", typeof(string));
                 dt.Columns.Add("firstName", typeof(string));
                 dt.Columns.Add("lastname", typeof(string));
-                dt.Columns.Add("email", typeof(DateTime));
-                dt.Columns.Add("age", typeof(int));
+                dt.Columns.Add("email", typeof(string));
+                dt.Columns.Add("age");
+                dt.Rows.Add("Name", "Firest Name", "Last Name", "Email", "Age");
 
-                foreach (user row in users)
+                foreach (UserModel row in users)
                 {
-                    dt.Rows.Add(row.username.ToString(), row.firstName.ToString(), row.lastName.ToString(),
+                    dt.Rows.Add(row.username.ToString(), row.firstName.ToString(), row.lastname.ToString(),
                         row.email.ToString(), row.age.ToString());
                 }
             }
             // wishList
-            //else if (selectedIndex == 5)
-            //{
-            //    IList<wishList> wish = null;
-            //    using (var context = new CVGSEntities())
-            //    {
-            //        wish = context.wishLists.Select(s => new wishList()
-            //        {
-            //            name = s.name,
-            //            // need to fecth genre name
-            //        }).ToList<wishList>();
-            //    }
-
-            //    dt.Columns.Add("name", typeof(string));
-
-            //    foreach (wishList row in wish)
-            //    {
-            //        dt.Rows.Add(row.name.ToString(), row.description.ToString(), row.publisher.ToString(),
-            //            row.publishDate.ToString(), row.genre.ToString(), row.rating.ToString(), row.price.ToString());
-            //    }
-            //}
+            else if (selectedIndex == 5)
+            {
+                IList<WishListModel> wish = null;
+                using (var context = new CVGSEntities())
+                {
+                    wish = context.wishLists.Select(s => new WishListModel()
+                    {
+                        username = s.username,
+                    }).ToList<WishListModel>();
+                    
+                }
+                dt.Columns.Add("Name", typeof(string));
+                dt.Rows.Add("Name");
+                foreach (WishListModel row in wish)
+                {
+                    dt.Rows.Add(row.username.ToString());
+                }
+            }
             // Sales Report
             else if (selectedIndex == 6)
             {
-                IList<order> sales = null;
+                IList<SalesModel> sales = null;
                 using (var context = new CVGSEntities())
                 {
-                    sales = context.orders.Select(s => new order()
+                    sales = context.orders.Select(s => new SalesModel()
                     {
                         username = s.username,
-                        orderDate = s.orderDate,
-                        shipDate = s.shipDate,
-                        gameId = s.gameId, // game name
-                    }).ToList<order>();
+                        gameId = s.gameId,
+                        orderDate = s.orderDate
+                        
+                    }).ToList<SalesModel>();
                 }
+                dt.Columns.Add("Name");
+                dt.Columns.Add("Game Id");
+                dt.Columns.Add("Order Date");
+                dt.Rows.Add("Name", "Game Id", "Order Date");
 
-                dt.Columns.Add("Name", typeof(string));
-                dt.Columns.Add("Order Date", typeof(DateTime));
-                dt.Columns.Add("Ship Date", typeof(DateTime));
-
-                foreach (order row in sales)
+                foreach (SalesModel row in sales)
                 {
-                    dt.Rows.Add(row.username.ToString(), row.orderDate.ToString(), row.shipDate.ToString());
+                    dt.Rows.Add(row.username.ToString(), row.gameId.ToString(), row.orderDate.ToString());
                 }
             }
             return dt;
@@ -209,24 +211,6 @@ namespace CVGS
             Response.Write(document);
 
             Response.End();
-        }
-
-        //dummy data Delete this if everything works fine
-        private DataTable MakeDataTable()
-        {
-            DataTable table = new DataTable();
-            table.Columns.Add("Dosage", typeof(int));
-            table.Columns.Add("Drug", typeof(string));
-            table.Columns.Add("Patient", typeof(string));
-            table.Columns.Add("Date", typeof(DateTime));
-
-            // Here we add five DataRows.
-            table.Rows.Add(25, "Indocin", "David", DateTime.Now);
-            table.Rows.Add(50, "Enebrel", "Sam", DateTime.Now);
-            table.Rows.Add(10, "Hydralazine", "Christoff", DateTime.Now);
-            table.Rows.Add(21, "Combivent", "Janet", DateTime.Now);
-            table.Rows.Add(100, "Dilantin", "Melanie", DateTime.Now);
-            return table;
         }
     }
 }

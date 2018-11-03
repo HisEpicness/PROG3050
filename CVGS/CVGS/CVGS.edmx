@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CVGSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CVGSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="esrb_rating">
           <Key>
             <PropertyRef Name="ratingCode" />
@@ -337,7 +337,8 @@
             <End Role="wishList" EntitySet="wishList" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CVGSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -415,8 +416,7 @@
           </Key>
           <Property Name="resetCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="user" Relationship="Self.FK__passReset__reset__75A278F5" FromRole="passReset" ToRole="user" />
-          <NavigationProperty Name="user1" Relationship="CVGSModel.FK__passReset__usern__76969D2E" FromRole="passReset" ToRole="user" />
+          <NavigationProperty Name="user" Relationship="Self.FK__passReset__usern__76969D2E" FromRole="passReset" ToRole="user" />
         </EntityType>
         <EntityType Name="platform">
           <Key>
@@ -450,11 +450,10 @@
           <NavigationProperty Name="genre1" Relationship="Self.FK__user__favGenre2__71D1E811" FromRole="user" ToRole="genre" />
           <NavigationProperty Name="login" Relationship="Self.FK__login__username__5AEE82B9" FromRole="user" ToRole="login" />
           <NavigationProperty Name="orders" Relationship="Self.FK__orders__username__4E88ABD4" FromRole="user" ToRole="orders" />
-          <NavigationProperty Name="passReset" Relationship="Self.FK__passReset__reset__75A278F5" FromRole="user" ToRole="passReset" />
+          <NavigationProperty Name="passResets" Relationship="Self.FK__passReset__usern__76969D2E" FromRole="user" ToRole="passReset" />
           <NavigationProperty Name="platform" Relationship="Self.FK__user__favPlatfor__6FE99F9F" FromRole="user" ToRole="platform" />
           <NavigationProperty Name="platform1" Relationship="Self.FK__user__favPlatfor__70DDC3D8" FromRole="user" ToRole="platform" />
           <NavigationProperty Name="wishLists" Relationship="Self.FK__wishList__userna__5070F446" FromRole="user" ToRole="wishList" />
-          <NavigationProperty Name="passResets" Relationship="CVGSModel.FK__passReset__usern__76969D2E" FromRole="user" ToRole="passReset" />
         </EntityType>
         <EntityType Name="wishList">
           <Key>
@@ -587,15 +586,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__passReset__reset__75A278F5">
+        <Association Name="FK__passReset__usern__76969D2E">
           <End Role="user" Type="Self.user" Multiplicity="1" />
-          <End Role="passReset" Type="Self.passReset" Multiplicity="0..1" />
+          <End Role="passReset" Type="Self.passReset" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
               <PropertyRef Name="username" />
             </Principal>
             <Dependent Role="passReset">
-              <PropertyRef Name="resetCode" />
+              <PropertyRef Name="username" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -686,7 +685,7 @@
             <End Role="user" EntitySet="users" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__passReset__reset__75A278F5" Association="Self.FK__passReset__reset__75A278F5">
+          <AssociationSet Name="FK__passReset__usern__76969D2E" Association="Self.FK__passReset__usern__76969D2E">
             <End Role="user" EntitySet="users" />
             <End Role="passReset" EntitySet="passResets" />
           </AssociationSet>
@@ -702,23 +701,7 @@
             <End Role="user" EntitySet="users" />
             <End Role="wishList" EntitySet="wishLists" />
           </AssociationSet>
-          <AssociationSet Name="FK__passReset__usern__76969D2E" Association="CVGSModel.FK__passReset__usern__76969D2E">
-            <End Role="user" EntitySet="users" />
-            <End Role="passReset" EntitySet="passResets" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK__passReset__usern__76969D2E">
-          <End Type="CVGSModel.user" Role="user" Multiplicity="1" />
-          <End Type="CVGSModel.passReset" Role="passReset" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="username" />
-            </Principal>
-            <Dependent Role="passReset">
-              <PropertyRef Name="username" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

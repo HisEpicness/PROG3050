@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6cdf666762d848fa9982fb5d9b1df34e" Name="Diagram1">
+      <Diagram DiagramId="a3dcd7b6e99843ff976d662425baef10" Name="Diagram1">
         <EntityTypeShape EntityType="CVGSModel.esrb_rating" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="CVGSModel.eventData" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CVGSModel.game" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
@@ -25,11 +25,10 @@
         <AssociationConnector Association="CVGSModel.FK__user__favGenre2__71D1E811" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__login__username__5AEE82B9" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__orders__username__4E88ABD4" ManuallyRouted="false" />
-        <AssociationConnector Association="CVGSModel.FK__passReset__reset__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="CVGSModel.FK__passReset__usern__76969D2E" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__user__favPlatfor__6FE99F9F" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__user__favPlatfor__70DDC3D8" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__wishList__userna__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="CVGSModel.FK__passReset__usern__76969D2E" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
