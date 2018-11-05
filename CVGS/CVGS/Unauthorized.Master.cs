@@ -83,6 +83,12 @@ namespace CVGS
             Session["Emp"] = null;
             Response.Redirect("/Account/Login");
         }
+
+        protected void ViewProfile(object sender, EventArgs e)
+        {
+            string user = Session["User"].ToString();
+            Response.Redirect("/User/Details/" + user);
+        }
     }
 
 }
