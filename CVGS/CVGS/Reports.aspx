@@ -12,10 +12,10 @@
                 <asp:ListItem Enabled="true" Text="Select Report" Value="-1"></asp:ListItem>
                 <asp:ListItem Text="Game List" Value="GameList" ></asp:ListItem>
                 <asp:ListItem Text="Game Detail" Value="GameDetail"></asp:ListItem>
-                <asp:ListItem Text="Member List" Value="3"></asp:ListItem>
-                <asp:ListItem Text="Member Detail" Value="4"></asp:ListItem>
-                <asp:ListItem Text="Wish List" Value="5"></asp:ListItem>
-                <asp:ListItem Text="Sales Report" Value="6"></asp:ListItem>
+                <asp:ListItem Text="Member List" Value="MemberList"></asp:ListItem>
+                <asp:ListItem Text="Member Detail" Value="MemberDetail"></asp:ListItem>
+                <asp:ListItem Text="Wish List" Value="Wishlist"></asp:ListItem>
+                <asp:ListItem Text="Sales Report" Value="SalesReport"></asp:ListItem>
             </asp:DropDownList>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
