@@ -36,6 +36,7 @@
     <NavigationProperty Name="genre2" Relationship="Self.FK__game__genre__4BAC3F29" FromRole="game" ToRole="genre" />
     <NavigationProperty Name="orders" Relationship="Self.FK__orders__gameId__4F7CD00D" FromRole="game" ToRole="orders" />
     <NavigationProperty Name="wishLists" Relationship="Self.FK__wishList__gameId__5165187F" FromRole="game" ToRole="wishList" />
+    <NavigationProperty Name="carts" Relationship="CVGSModel.FK_cart_game" FromRole="game" ToRole="cart" />
   </EntityType>
   <EntityType Name="genre">
     <Key>
@@ -55,6 +56,7 @@
     <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="user" Relationship="Self.FK__login__username__5AEE82B9" FromRole="login" ToRole="user" />
+    <NavigationProperty Name="carts" Relationship="CVGSModel.FK_cart_login" FromRole="login" ToRole="cart" />
   </EntityType>
   <EntityType Name="order">
     <Key>
@@ -365,6 +367,15 @@
       <End Role="user" EntitySet="users" />
       <End Role="passReset" EntitySet="passResets" />
     </AssociationSet>
+    <EntitySet Name="carts" EntityType="CVGSModel.cart" />
+    <AssociationSet Name="FK_cart_game" Association="CVGSModel.FK_cart_game">
+      <End Role="game" EntitySet="games" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_cart_login" Association="CVGSModel.FK_cart_login">
+      <End Role="login" EntitySet="logins" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
   </EntityContainer>
   <Association Name="FK__passReset__usern__76969D2E">
     <End Type="CVGSModel.user" Role="user" Multiplicity="1" />
@@ -374,6 +385,41 @@
         <PropertyRef Name="username" />
       </Principal>
       <Dependent Role="passReset">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="cart">
+    <Key>
+      <PropertyRef Name="username" />
+      <PropertyRef Name="gameId" />
+    </Key>
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gameId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="quantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <NavigationProperty Name="game" Relationship="CVGSModel.FK_cart_game" FromRole="cart" ToRole="game" />
+    <NavigationProperty Name="login" Relationship="CVGSModel.FK_cart_login" FromRole="cart" ToRole="login" />
+  </EntityType>
+  <Association Name="FK_cart_game">
+    <End Type="CVGSModel.game" Role="game" Multiplicity="1" />
+    <End Type="CVGSModel.cart" Role="cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="game">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="gameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_cart_login">
+    <End Type="CVGSModel.login" Role="login" Multiplicity="1" />
+    <End Type="CVGSModel.cart" Role="cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="cart">
         <PropertyRef Name="username" />
       </Dependent>
     </ReferentialConstraint>

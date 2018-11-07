@@ -14,9 +14,17 @@ namespace CVGS
     
     public partial class login
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public login()
+        {
+            this.carts = new HashSet<cart>();
+        }
+    
         public string username { get; set; }
         public string password { get; set; }
     
         public virtual user user { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cart> carts { get; set; }
     }
 }

@@ -30,19 +30,20 @@
                     <li><a href="/Event/Index">Events</a></li>
                     <li><a runat="server" href="/Game/Index">Games</a></li>
                     <li><a runat="server" href="/User/Index">Users</a></li>
+                    <li><a runat="server" href="/Cart/Index">Cart</a></li>
+
 
                     @if (Session["Emp"] != null)
                     {
                         <li><a runat="server" href="~/Reports">Reports</a></li>
                     }
                 </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>Hello, @Session["User"]!</li>
-                        <li>@Html.ActionLink("View Profile", "Details", "User", new { id = Session["User"].ToString() }, null)</li>
-                        <li>
-                            <a runat="server" href="~/Account/Login" onserverclick="LoggingOut">Log Out</a>
-                        </li>
-                    </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("View Profile", "Details", "User", new { id = Session["User"].ToString() }, null)</li>
+                    <li>
+                        <a runat="server" href="~/Account/Login" onserverclick="LoggingOut">Log Out</a>
+                    </li>
+                </ul>
                 @*</ul>*@
             </div>
         </div>

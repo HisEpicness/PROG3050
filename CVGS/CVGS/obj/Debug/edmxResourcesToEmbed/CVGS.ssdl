@@ -1,5 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="CVGSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cart">
+    <Key>
+      <PropertyRef Name="username" />
+      <PropertyRef Name="gameId" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="gameId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="quantity" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
   <EntityType Name="esrb_rating">
     <Key>
       <PropertyRef Name="ratingCode" />
@@ -264,7 +273,32 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_cart_game">
+    <End Role="game" Type="Self.game" Multiplicity="1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="game">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="gameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_cart_login">
+    <End Role="login" Type="Self.login" Multiplicity="1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="CVGSModelStoreContainer">
+    <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="esrb_rating" EntityType="Self.esrb_rating" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="eventData" EntityType="Self.eventData" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="game" EntityType="Self.game" Schema="dbo" store:Type="Tables" />
@@ -330,6 +364,14 @@
     <AssociationSet Name="FK__wishList__userna__5070F446" Association="Self.FK__wishList__userna__5070F446">
       <End Role="user" EntitySet="user" />
       <End Role="wishList" EntitySet="wishList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_cart_game" Association="Self.FK_cart_game">
+      <End Role="game" EntitySet="game" />
+      <End Role="cart" EntitySet="cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_cart_login" Association="Self.FK_cart_login">
+      <End Role="login" EntitySet="login" />
+      <End Role="cart" EntitySet="cart" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

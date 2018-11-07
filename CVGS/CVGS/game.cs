@@ -19,6 +19,7 @@ namespace CVGS
         {
             this.orders = new HashSet<order>();
             this.wishLists = new HashSet<wishList>();
+            this.carts = new HashSet<cart>();
         }
     
         public decimal id { get; set; }
@@ -37,5 +38,7 @@ namespace CVGS
         public virtual ICollection<order> orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<wishList> wishLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cart> carts { get; set; }
     }
 }

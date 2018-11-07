@@ -78,5 +78,6 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Add to Cart", "Create", "Cart", new { id = Model.id }, null) | @* Pass gameId to CartControllers' Create method *@
     @Html.ActionLink("Back to List", "Index")
 </p>

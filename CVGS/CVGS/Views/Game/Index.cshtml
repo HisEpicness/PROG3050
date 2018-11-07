@@ -67,14 +67,17 @@
         <td>
             @Html.DisplayFor(modelItem => item.genre2.name)
         </td>
-        @if (Session["Emp"] != null)
-        {
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+        
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.id }) |
+            @if (Session["Emp"] != null)
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) 
+                <br />
                 @Html.ActionLink("Delete", "Delete", new { id = item.id })
-            </td>
-        }
+            }
+        </td>
+        
 
     </tr>
 }
