@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CVGS.cart>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            User
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.game.name)*@ Game Name
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.quantity)*@ Quantity
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.game.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Change Quantity", "Edit", new { id = item.itemId }) |
+            @Html.ActionLink("Game Details", "Details", new { id = item.gameId }) |
+            @Html.ActionLink("Remove from Cart", "Delete", new { id = item.itemId })
+        </td>
+    </tr>
+}
+
+</table>
