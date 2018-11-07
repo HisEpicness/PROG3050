@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream
 ﻿<%@ Page Title="Reports" Language="C#" AutoEventWireup="true" MasterPageFile="~/Unauthorized.Master" CodeBehind="Reports.aspx.cs" Inherits="CVGS.Reports" %>
+=======
+﻿<%@ Page Title="Reports" Language="C#" MasterPageFile="~/unauthorized.Master" AutoEventWireup="true" CodeBehind="Reports.aspx.cs" Inherits="CVGS.Reports" %>
+
+>>>>>>> Stashed changes
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <h2><%: Title %>.</h2>
