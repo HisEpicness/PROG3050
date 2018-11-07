@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6cdf666762d848fa9982fb5d9b1df34e" Name="Diagram1">
+      <Diagram DiagramId="6cdf666762d848fa9982fb5d9b1df34e" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="CVGSModel.esrb_rating" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="CVGSModel.eventData" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CVGSModel.game" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
@@ -30,7 +30,10 @@
         <AssociationConnector Association="CVGSModel.FK__user__favPlatfor__70DDC3D8" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__wishList__userna__5070F446" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__passReset__usern__76969D2E" />
-      </Diagram>
+        <EntityTypeShape EntityType="CVGSModel.cart" Width="1.5" PointX="10.5" PointY="9.875" />
+        <AssociationConnector Association="CVGSModel.FK_cart_game" />
+        <AssociationConnector Association="CVGSModel.FK_cart_login" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

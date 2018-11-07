@@ -75,6 +75,9 @@ namespace CVGS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(int id,[Bind(Include = "username,gameId,quantity")] cart cart)
         {
+            //cart.gameId = id;
+            //cart.username = Session["User"].ToString();
+            //cart.quantity = 1;
             if (ModelState.IsValid)
             {
                 // Filter list of cart items to include only the current users' items
@@ -91,7 +94,7 @@ namespace CVGS.Controllers
                 {
                     counter++;
                     // If item.gameId equals id, the game exists within the cart -> Quantity++.
-                    if (item.gameId == id)
+                    if (item.gameId == id && item.username == Session["User"].ToString())
                     {
                         //Game exists inusers' cart
                         exists = true;
@@ -103,7 +106,6 @@ namespace CVGS.Controllers
                     {
                         //Game does not exist in users' cart
                         var newItem = db.carts.Add(cart);
-                        newItem.itemId = counter + 1;
                         newItem.username = Session["User"].ToString();
                         newItem.gameId = id;
                         newItem.quantity = 1;
@@ -126,7 +128,7 @@ namespace CVGS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            cart cart = db.carts.Find(id);
+            cart cart = db.carts.Find(Session["User"].ToString(), id);
 
             if (cart == null)
             {
@@ -144,16 +146,11 @@ namespace CVGS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, [Bind(Include = "username,gameId,quantity")] cart cart)
         {
+            cart.username = Session["User"].ToString();
+            cart.gameId = id;
             if (ModelState.IsValid)
             {
-                var oldItem = db.carts.SingleOrDefault(a => a.itemId == id);
-                var gameId = oldItem.gameId;
-
-                db.carts.Remove(oldItem);
-                db.carts.Add(cart);
-                cart.username = Session["User"].ToString();
-                cart.gameId = gameId;
-
+                db.Entry(cart).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -169,7 +166,7 @@ namespace CVGS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            cart cart = db.carts.Find(id);
+            cart cart = db.carts.Find(Session["User"].ToString(), id);
             if (cart == null)
             {
                 return HttpNotFound();
@@ -182,7 +179,7 @@ namespace CVGS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            cart cart = db.carts.Find(id);
+            cart cart = db.carts.Find(Session["User"].ToString(), id);
             db.carts.Remove(cart);
             db.SaveChanges();
             return RedirectToAction("Index");

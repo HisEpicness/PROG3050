@@ -35,5 +35,6 @@ namespace CVGS
         public virtual DbSet<platform> platforms { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<wishList> wishLists { get; set; }
+        public virtual DbSet<cart> carts { get; set; }
     }
 }

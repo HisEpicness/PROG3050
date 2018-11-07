@@ -15,7 +15,6 @@
     <h4>cart</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.itemId)
 
     @* Only allow quantity to be edited *@
     <div class="form-group">

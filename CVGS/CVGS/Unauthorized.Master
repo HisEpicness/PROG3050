@@ -53,7 +53,7 @@
                         <li><a runat="server" href="/Event/Index">Events</a></li>
                         <li><a runat="server" href="/Game/Index">Games</a></li>
                         <li><a runat="server" href="/User/Index">Users</a></li>
-
+                        <li><a runat="server" href="/Cart/Index">Cart</a></li>
                         <% if (Session["Emp"] != null)
                                 { %>
                             <li><a runat="server" href="~/Reports">Reports</a></li>

@@ -36,9 +36,9 @@
             @Html.DisplayFor(modelItem => item.quantity)
         </td>
         <td>
-            @Html.ActionLink("Change Quantity", "Edit", new { id = item.itemId }) |
-            @Html.ActionLink("Game Details", "Details", new { id = item.gameId }) |
-            @Html.ActionLink("Remove from Cart", "Delete", new { id = item.itemId })
+            @Html.ActionLink("Change Quantity", "Edit", new { id = item.gameId }) |
+            @Html.ActionLink("Game Details", "Details", "Game", new { id = item.gameId }, null) |
+            @Html.ActionLink("Remove from Cart", "Delete", new { id = item.gameId })
         </td>
     </tr>
 }
