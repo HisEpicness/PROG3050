@@ -146,7 +146,7 @@ namespace CVGS
                     {
                         username = s.username,
                     }).ToList<WishListModel>();
-                    
+
                 }
                 dt.Columns.Add("Name", typeof(string));
                 dt.Rows.Add("Name");
