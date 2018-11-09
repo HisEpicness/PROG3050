@@ -7,7 +7,6 @@
 <h2>Details of Game</h2>
 
 <div>
-    <h4>game</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -76,8 +75,21 @@
 
     </dl>
 </div>
-<p>
+<div>
+    @using (Html.BeginForm("Index", "Review"))
+    {
+    <div class="col-md-10">
+        <textarea class="form-control text-box multi-line" id="txtAreaReview" name="txtAreaReview" rows="3"></textarea>
+        <span class="field-validation-valid text-danger" data-valmsg-for="txtAreaReview" data-valmsg-replace="true"></span>
+    </div>
+        <input type="hidden" name="id" value="@Model.id" />
+        <input type="submit" value="Add Review" />
+    }
+</div>
+
+<div>
+    <br /><br /><br />
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
     @Html.ActionLink("Add to Cart", "Create", "Cart", new { id = Model.id }, null) | @* Pass gameId to CartControllers' Create method *@
     @Html.ActionLink("Back to List", "Index")
-</p>
+</div>
