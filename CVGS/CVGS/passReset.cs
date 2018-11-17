@@ -17,6 +17,6 @@ namespace CVGS
         public string resetCode { get; set; }
         public string username { get; set; }
     
-        public virtual user user { get; set; }
+        public virtual user user1 { get; set; }
     }
 }

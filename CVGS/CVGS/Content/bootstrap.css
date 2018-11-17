@@ -6754,4 +6754,8 @@ button.close {
     display: none !important;
   }
 }
+
+.hidden{
+    display: none;
+}
 /*# sourceMappingURL=bootstrap.css.map */

@@ -25,7 +25,6 @@
         <AssociationConnector Association="CVGSModel.FK__user__favGenre2__71D1E811" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__login__username__5AEE82B9" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__orders__username__4E88ABD4" ManuallyRouted="false" />
-        <AssociationConnector Association="CVGSModel.FK__passReset__reset__75A278F5" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__user__favPlatfor__6FE99F9F" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__user__favPlatfor__70DDC3D8" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__wishList__userna__5070F446" ManuallyRouted="false" />

@@ -122,11 +122,14 @@
 <p>
     @if (Model.username == Session["User"].ToString())
     {
+        @Html.ActionLink("View Wishlist", "Index", "Wishlist", new { id = Model.username }, null);
+        <br />
         @Html.ActionLink("Edit Profile", "Edit", new { id = Model.username });
         <br />
         <a runat="server" href="~/Account/ChangePassword">Change Password</a>
         <br />
+
     }
-                                                                     
+
     @Html.ActionLink("Back to List", "Index")
 </p>
