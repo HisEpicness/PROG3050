@@ -34,9 +34,10 @@
     <NavigationProperty Name="esrb_rating" Relationship="Self.FK__game__rating__4CA06362" FromRole="game" ToRole="esrb_rating" />
     <NavigationProperty Name="genre1" Relationship="Self.FK__game__genre__49C3F6B7" FromRole="game" ToRole="genre" />
     <NavigationProperty Name="genre2" Relationship="Self.FK__game__genre__4BAC3F29" FromRole="game" ToRole="genre" />
-    <NavigationProperty Name="orders" Relationship="Self.FK__orders__gameId__4F7CD00D" FromRole="game" ToRole="orders" />
     <NavigationProperty Name="wishLists" Relationship="Self.FK__wishList__gameId__5165187F" FromRole="game" ToRole="wishList" />
     <NavigationProperty Name="carts" Relationship="CVGSModel.FK_cart_game" FromRole="game" ToRole="cart" />
+    <NavigationProperty Name="orders" Relationship="CVGSModel.FK__orders__gameId__4F7CD00D" FromRole="game" ToRole="order" />
+    <NavigationProperty Name="reviews" Relationship="CVGSModel.FK_reviews_user" FromRole="game" ToRole="review" />
   </EntityType>
   <EntityType Name="genre">
     <Key>
@@ -57,18 +58,6 @@
     <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="user" Relationship="Self.FK__login__username__5AEE82B9" FromRole="login" ToRole="user" />
     <NavigationProperty Name="carts" Relationship="CVGSModel.FK_cart_login" FromRole="login" ToRole="cart" />
-  </EntityType>
-  <EntityType Name="order">
-    <Key>
-      <PropertyRef Name="orderId" />
-    </Key>
-    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="orderId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="gameId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="shipDate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="game" Relationship="Self.FK__orders__gameId__4F7CD00D" FromRole="orders" ToRole="game" />
-    <NavigationProperty Name="user" Relationship="Self.FK__orders__username__4E88ABD4" FromRole="orders" ToRole="user" />
   </EntityType>
   <EntityType Name="passReset">
     <Key>
@@ -110,12 +99,14 @@
     <NavigationProperty Name="genre" Relationship="Self.FK__user__favGenre__72C60C4A" FromRole="user" ToRole="genre" />
     <NavigationProperty Name="genre1" Relationship="Self.FK__user__favGenre2__71D1E811" FromRole="user" ToRole="genre" />
     <NavigationProperty Name="login" Relationship="Self.FK__login__username__5AEE82B9" FromRole="user" ToRole="login" />
-    <NavigationProperty Name="orders" Relationship="Self.FK__orders__username__4E88ABD4" FromRole="user" ToRole="orders" />
     <NavigationProperty Name="passReset" Relationship="Self.FK__passReset__reset__75A278F5" FromRole="user" ToRole="passReset" />
     <NavigationProperty Name="platform" Relationship="Self.FK__user__favPlatfor__6FE99F9F" FromRole="user" ToRole="platform" />
     <NavigationProperty Name="platform1" Relationship="Self.FK__user__favPlatfor__70DDC3D8" FromRole="user" ToRole="platform" />
     <NavigationProperty Name="wishLists" Relationship="Self.FK__wishList__userna__5070F446" FromRole="user" ToRole="wishList" />
     <NavigationProperty Name="passResets" Relationship="CVGSModel.FK__passReset__usern__76969D2E" FromRole="user" ToRole="passReset" />
+    <NavigationProperty Name="creditInformations" Relationship="CVGSModel.FK__creditInf__usern__7B264821" FromRole="user" ToRole="creditInformation" />
+    <NavigationProperty Name="FriendsLists" Relationship="CVGSModel.FK_FriendsList_FriendsList" FromRole="user" ToRole="FriendsList" />
+    <NavigationProperty Name="orders" Relationship="CVGSModel.FK__orders__username__4E88ABD4" FromRole="user" ToRole="order" />
   </EntityType>
   <EntityType Name="wishList">
     <Key>
@@ -176,18 +167,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__orders__gameId__4F7CD00D">
-    <End Role="game" Type="Self.game" Multiplicity="1" />
-    <End Role="orders" Type="Self.order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="game">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="orders">
-        <PropertyRef Name="gameId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__wishList__gameId__5165187F">
     <End Role="game" Type="Self.game" Multiplicity="1" />
     <End Role="wishList" Type="Self.wishList" Multiplicity="*" />
@@ -232,18 +211,6 @@
         <PropertyRef Name="username" />
       </Principal>
       <Dependent Role="login">
-        <PropertyRef Name="username" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__orders__username__4E88ABD4">
-    <End Role="user" Type="Self.user" Multiplicity="1" />
-    <End Role="orders" Type="Self.order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="user">
-        <PropertyRef Name="username" />
-      </Principal>
-      <Dependent Role="orders">
         <PropertyRef Name="username" />
       </Dependent>
     </ReferentialConstraint>
@@ -302,7 +269,6 @@
     <EntitySet Name="games" EntityType="Self.game" />
     <EntitySet Name="genres" EntityType="Self.genre" />
     <EntitySet Name="logins" EntityType="Self.login" />
-    <EntitySet Name="orders" EntityType="Self.order" />
     <EntitySet Name="passResets" EntityType="Self.passReset" />
     <EntitySet Name="platforms" EntityType="Self.platform" />
     <EntitySet Name="users" EntityType="Self.user" />
@@ -323,10 +289,6 @@
       <End Role="genre" EntitySet="genres" />
       <End Role="game" EntitySet="games" />
     </AssociationSet>
-    <AssociationSet Name="FK__orders__gameId__4F7CD00D" Association="Self.FK__orders__gameId__4F7CD00D">
-      <End Role="game" EntitySet="games" />
-      <End Role="orders" EntitySet="orders" />
-    </AssociationSet>
     <AssociationSet Name="FK__wishList__gameId__5165187F" Association="Self.FK__wishList__gameId__5165187F">
       <End Role="game" EntitySet="games" />
       <End Role="wishList" EntitySet="wishLists" />
@@ -342,10 +304,6 @@
     <AssociationSet Name="FK__login__username__5AEE82B9" Association="Self.FK__login__username__5AEE82B9">
       <End Role="user" EntitySet="users" />
       <End Role="login" EntitySet="logins" />
-    </AssociationSet>
-    <AssociationSet Name="FK__orders__username__4E88ABD4" Association="Self.FK__orders__username__4E88ABD4">
-      <End Role="user" EntitySet="users" />
-      <End Role="orders" EntitySet="orders" />
     </AssociationSet>
     <AssociationSet Name="FK__passReset__reset__75A278F5" Association="Self.FK__passReset__reset__75A278F5">
       <End Role="user" EntitySet="users" />
@@ -375,6 +333,40 @@
     <AssociationSet Name="FK_cart_login" Association="CVGSModel.FK_cart_login">
       <End Role="login" EntitySet="logins" />
       <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <EntitySet Name="cardTypes" EntityType="CVGSModel.cardType" />
+    <EntitySet Name="creditInformations" EntityType="CVGSModel.creditInformation" />
+    <EntitySet Name="FriendsLists" EntityType="CVGSModel.FriendsList" />
+    <EntitySet Name="orders" EntityType="CVGSModel.order" />
+    <EntitySet Name="orderStatus" EntityType="CVGSModel.orderStatu" />
+    <EntitySet Name="reviews" EntityType="CVGSModel.review" />
+    <AssociationSet Name="FK__creditInf__cardT__7A3223E8" Association="CVGSModel.FK__creditInf__cardT__7A3223E8">
+      <End Role="cardType" EntitySet="cardTypes" />
+      <End Role="creditInformation" EntitySet="creditInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__creditInf__usern__7B264821" Association="CVGSModel.FK__creditInf__usern__7B264821">
+      <End Role="user" EntitySet="users" />
+      <End Role="creditInformation" EntitySet="creditInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FriendsList_FriendsList" Association="CVGSModel.FK_FriendsList_FriendsList">
+      <End Role="user" EntitySet="users" />
+      <End Role="FriendsList" EntitySet="FriendsLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orders__gameId__4F7CD00D" Association="CVGSModel.FK__orders__gameId__4F7CD00D">
+      <End Role="game" EntitySet="games" />
+      <End Role="order" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reviews_user" Association="CVGSModel.FK_reviews_user">
+      <End Role="game" EntitySet="games" />
+      <End Role="review" EntitySet="reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orders__status__756D6ECB" Association="CVGSModel.FK__orders__status__756D6ECB">
+      <End Role="orderStatu" EntitySet="orderStatus" />
+      <End Role="order" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orders__username__4E88ABD4" Association="CVGSModel.FK__orders__username__4E88ABD4">
+      <End Role="user" EntitySet="users" />
+      <End Role="order" EntitySet="orders" />
     </AssociationSet>
   </EntityContainer>
   <Association Name="FK__passReset__usern__76969D2E">
@@ -420,6 +412,150 @@
         <PropertyRef Name="username" />
       </Principal>
       <Dependent Role="cart">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="cardType">
+    <Key>
+      <PropertyRef Name="type" />
+    </Key>
+    <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="creditInformations" Relationship="CVGSModel.FK__creditInf__cardT__7A3223E8" FromRole="cardType" ToRole="creditInformation" />
+  </EntityType>
+  <EntityType Name="creditInformation">
+    <Key>
+      <PropertyRef Name="cardNumber" />
+    </Key>
+    <Property Name="cardNumber" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="cardHolder" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cardType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="expiryDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="securityCode" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <NavigationProperty Name="cardType1" Relationship="CVGSModel.FK__creditInf__cardT__7A3223E8" FromRole="creditInformation" ToRole="cardType" />
+    <NavigationProperty Name="user" Relationship="CVGSModel.FK__creditInf__usern__7B264821" FromRole="creditInformation" ToRole="user" />
+  </EntityType>
+  <EntityType Name="FriendsList">
+    <Key>
+      <PropertyRef Name="username" />
+      <PropertyRef Name="FriendIId" />
+    </Key>
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FriendIId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user" Relationship="CVGSModel.FK_FriendsList_FriendsList" FromRole="FriendsList" ToRole="user" />
+  </EntityType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="orderId" />
+    </Key>
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="orderId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="gameId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="shipDate" Type="DateTime" Precision="0" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="game" Relationship="CVGSModel.FK__orders__gameId__4F7CD00D" FromRole="order" ToRole="game" />
+    <NavigationProperty Name="orderStatu" Relationship="CVGSModel.FK__orders__status__756D6ECB" FromRole="order" ToRole="orderStatu" />
+    <NavigationProperty Name="user" Relationship="CVGSModel.FK__orders__username__4E88ABD4" FromRole="order" ToRole="user" />
+  </EntityType>
+  <EntityType Name="orderStatu">
+    <Key>
+      <PropertyRef Name="status" />
+    </Key>
+    <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="orders" Relationship="CVGSModel.FK__orders__status__756D6ECB" FromRole="orderStatu" ToRole="order" />
+  </EntityType>
+  <EntityType Name="review">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="review1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="gameId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="game" Relationship="CVGSModel.FK_reviews_user" FromRole="review" ToRole="game" />
+  </EntityType>
+  <Association Name="FK__creditInf__cardT__7A3223E8">
+    <End Type="CVGSModel.cardType" Role="cardType" Multiplicity="1" />
+    <End Type="CVGSModel.creditInformation" Role="creditInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cardType">
+        <PropertyRef Name="type" />
+      </Principal>
+      <Dependent Role="creditInformation">
+        <PropertyRef Name="cardType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__creditInf__usern__7B264821">
+    <End Type="CVGSModel.user" Role="user" Multiplicity="1" />
+    <End Type="CVGSModel.creditInformation" Role="creditInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="creditInformation">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FriendsList_FriendsList">
+    <End Type="CVGSModel.user" Role="user" Multiplicity="1" />
+    <End Type="CVGSModel.FriendsList" Role="FriendsList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="FriendsList">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orders__gameId__4F7CD00D">
+    <End Type="CVGSModel.game" Role="game" Multiplicity="1" />
+    <End Type="CVGSModel.order" Role="order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="game">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="gameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reviews_user">
+    <End Type="CVGSModel.game" Role="game" Multiplicity="1" />
+    <End Type="CVGSModel.review" Role="review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="game">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="review">
+        <PropertyRef Name="gameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orders__status__756D6ECB">
+    <End Type="CVGSModel.orderStatu" Role="orderStatu" Multiplicity="0..1" />
+    <End Type="CVGSModel.order" Role="order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orderStatu">
+        <PropertyRef Name="status" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orders__username__4E88ABD4">
+    <End Type="CVGSModel.user" Role="user" Multiplicity="1" />
+    <End Type="CVGSModel.order" Role="order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="order">
         <PropertyRef Name="username" />
       </Dependent>
     </ReferentialConstraint>

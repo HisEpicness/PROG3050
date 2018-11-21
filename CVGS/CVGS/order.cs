@@ -19,8 +19,10 @@ namespace CVGS
         public decimal gameId { get; set; }
         public System.DateTime orderDate { get; set; }
         public Nullable<System.DateTime> shipDate { get; set; }
+        public string status { get; set; }
     
         public virtual game game { get; set; }
+        public virtual orderStatu orderStatu { get; set; }
         public virtual user user { get; set; }
     }
 }

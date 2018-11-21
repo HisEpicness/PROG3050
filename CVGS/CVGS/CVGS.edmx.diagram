@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="CVGSModel.game" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="CVGSModel.genre" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CVGSModel.login" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CVGSModel.order" Width="1.5" PointX="11.25" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CVGSModel.passReset" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CVGSModel.platform" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CVGSModel.user" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
@@ -19,12 +18,10 @@
         <AssociationConnector Association="CVGSModel.FK__event__createdBy__4D94879B" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__game__genre__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__game__genre__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="CVGSModel.FK__orders__gameId__4F7CD00D" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__wishList__gameId__5165187F" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__user__favGenre__72C60C4A" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__user__favGenre2__71D1E811" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__login__username__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="CVGSModel.FK__orders__username__4E88ABD4" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__passReset__reset__75A278F5" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__user__favPlatfor__6FE99F9F" ManuallyRouted="false" />
         <AssociationConnector Association="CVGSModel.FK__user__favPlatfor__70DDC3D8" ManuallyRouted="false" />
@@ -33,6 +30,19 @@
         <EntityTypeShape EntityType="CVGSModel.cart" Width="1.5" PointX="10.5" PointY="9.875" />
         <AssociationConnector Association="CVGSModel.FK_cart_game" />
         <AssociationConnector Association="CVGSModel.FK_cart_login" />
+        <EntityTypeShape EntityType="CVGSModel.cardType" Width="1.5" PointX="11" PointY="13.375" />
+        <EntityTypeShape EntityType="CVGSModel.creditInformation" Width="1.5" PointX="13.25" PointY="10.875" />
+        <EntityTypeShape EntityType="CVGSModel.FriendsList" Width="1.5" PointX="8.25" PointY="12.625" />
+        <EntityTypeShape EntityType="CVGSModel.order" Width="1.5" PointX="13.25" PointY="6.75" />
+        <EntityTypeShape EntityType="CVGSModel.orderStatu" Width="1.5" PointX="11" PointY="7.375" />
+        <EntityTypeShape EntityType="CVGSModel.review" Width="1.5" PointX="5.25" PointY="12.5" />
+        <AssociationConnector Association="CVGSModel.FK__creditInf__cardT__7A3223E8" />
+        <AssociationConnector Association="CVGSModel.FK__creditInf__usern__7B264821" />
+        <AssociationConnector Association="CVGSModel.FK_FriendsList_FriendsList" />
+        <AssociationConnector Association="CVGSModel.FK__orders__gameId__4F7CD00D" />
+        <AssociationConnector Association="CVGSModel.FK_reviews_user" />
+        <AssociationConnector Association="CVGSModel.FK__orders__status__756D6ECB" />
+        <AssociationConnector Association="CVGSModel.FK__orders__username__4E88ABD4" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

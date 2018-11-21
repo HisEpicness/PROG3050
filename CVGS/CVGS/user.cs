@@ -18,9 +18,11 @@ namespace CVGS
         public user()
         {
             this.eventDatas = new HashSet<eventData>();
-            this.orders = new HashSet<order>();
-            this.passResets = new HashSet<passReset>();
             this.wishLists = new HashSet<wishList>();
+            this.passResets = new HashSet<passReset>();
+            this.creditInformations = new HashSet<creditInformation>();
+            this.FriendsLists = new HashSet<FriendsList>();
+            this.orders = new HashSet<order>();
         }
     
         public string username { get; set; }
@@ -43,13 +45,18 @@ namespace CVGS
         public virtual genre genre { get; set; }
         public virtual genre genre1 { get; set; }
         public virtual login login { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<order> orders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<passReset> passResets { get; set; }
+        public virtual passReset passReset { get; set; }
         public virtual platform platform { get; set; }
         public virtual platform platform1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<wishList> wishLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<passReset> passResets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<creditInformation> creditInformations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FriendsList> FriendsLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<order> orders { get; set; }
     }
 }
