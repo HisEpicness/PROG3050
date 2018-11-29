@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="CVGSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cardType">
+    <Key>
+      <PropertyRef Name="type" />
+    </Key>
+    <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="cart">
     <Key>
       <PropertyRef Name="username" />
@@ -8,6 +14,17 @@
     <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="gameId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="quantity" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="creditInformation">
+    <Key>
+      <PropertyRef Name="cardNumber" />
+    </Key>
+    <Property Name="cardNumber" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="cardHolder" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cardType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="expiryDate" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="securityCode" Type="numeric" Precision="18" Scale="0" Nullable="false" />
   </EntityType>
   <EntityType Name="esrb_rating">
     <Key>
@@ -25,6 +42,14 @@
     <Property Name="date" Type="date" Nullable="false" />
     <Property Name="createdBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="description" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FriendsList">
+    <Key>
+      <PropertyRef Name="username" />
+      <PropertyRef Name="FriendIId" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FriendIId" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="game">
     <Key>
@@ -62,6 +87,13 @@
     <Property Name="gameId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="orderDate" Type="date" Nullable="false" />
     <Property Name="shipDate" Type="date" />
+    <Property Name="status" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="orderStatus">
+    <Key>
+      <PropertyRef Name="status" />
+    </Key>
+    <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="passReset">
     <Key>
@@ -76,6 +108,15 @@
     </Key>
     <Property Name="platformId" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="platformName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reviews">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="review" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="gameId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="user">
     <Key>
@@ -105,6 +146,30 @@
     <Property Name="gameId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="dateAdded" Type="date" />
   </EntityType>
+  <Association Name="FK__creditInf__cardT__7A3223E8">
+    <End Role="cardType" Type="Self.cardType" Multiplicity="1" />
+    <End Role="creditInformation" Type="Self.creditInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cardType">
+        <PropertyRef Name="type" />
+      </Principal>
+      <Dependent Role="creditInformation">
+        <PropertyRef Name="cardType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__creditInf__usern__7B264821">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="creditInformation" Type="Self.creditInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="creditInformation">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__event__createdBy__4D94879B">
     <End Role="user" Type="Self.user" Multiplicity="1" />
     <End Role="eventData" Type="Self.eventData" Multiplicity="*" />
@@ -174,6 +239,18 @@
       </Principal>
       <Dependent Role="orders">
         <PropertyRef Name="gameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orders__status__756D6ECB">
+    <End Role="orderStatus" Type="Self.orderStatus" Multiplicity="0..1" />
+    <End Role="orders" Type="Self.orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orderStatus">
+        <PropertyRef Name="status" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="status" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -297,18 +374,55 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_FriendsList_FriendsList">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="FriendsList" Type="Self.FriendsList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="FriendsList">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reviews_user">
+    <End Role="game" Type="Self.game" Multiplicity="1" />
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="game">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="gameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="CVGSModelStoreContainer">
+    <EntitySet Name="cardType" EntityType="Self.cardType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="creditInformation" EntityType="Self.creditInformation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="esrb_rating" EntityType="Self.esrb_rating" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="eventData" EntityType="Self.eventData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FriendsList" EntityType="Self.FriendsList" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="game" EntityType="Self.game" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="genre" EntityType="Self.genre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orderStatus" EntityType="Self.orderStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="passReset" EntityType="Self.passReset" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="platform" EntityType="Self.platform" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reviews" EntityType="Self.reviews" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="wishList" EntityType="Self.wishList" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__creditInf__cardT__7A3223E8" Association="Self.FK__creditInf__cardT__7A3223E8">
+      <End Role="cardType" EntitySet="cardType" />
+      <End Role="creditInformation" EntitySet="creditInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__creditInf__usern__7B264821" Association="Self.FK__creditInf__usern__7B264821">
+      <End Role="user" EntitySet="user" />
+      <End Role="creditInformation" EntitySet="creditInformation" />
+    </AssociationSet>
     <AssociationSet Name="FK__event__createdBy__4D94879B" Association="Self.FK__event__createdBy__4D94879B">
       <End Role="user" EntitySet="user" />
       <End Role="eventData" EntitySet="eventData" />
@@ -331,6 +445,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__orders__gameId__4F7CD00D" Association="Self.FK__orders__gameId__4F7CD00D">
       <End Role="game" EntitySet="game" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orders__status__756D6ECB" Association="Self.FK__orders__status__756D6ECB">
+      <End Role="orderStatus" EntitySet="orderStatus" />
       <End Role="orders" EntitySet="orders" />
     </AssociationSet>
     <AssociationSet Name="FK__orders__username__4E88ABD4" Association="Self.FK__orders__username__4E88ABD4">
@@ -372,6 +490,14 @@
     <AssociationSet Name="FK_cart_login" Association="Self.FK_cart_login">
       <End Role="login" EntitySet="login" />
       <End Role="cart" EntitySet="cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FriendsList_FriendsList" Association="Self.FK_FriendsList_FriendsList">
+      <End Role="user" EntitySet="user" />
+      <End Role="FriendsList" EntitySet="FriendsList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reviews_user" Association="Self.FK_reviews_user">
+      <End Role="game" EntitySet="game" />
+      <End Role="reviews" EntitySet="reviews" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
