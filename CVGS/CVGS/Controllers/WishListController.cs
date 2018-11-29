@@ -19,19 +19,19 @@ namespace CVGS.Controllers
         // GET: WishList
         public ActionResult Index(string id)
         {
-
+            //Get current user and assign it to currentUser
             string currentUser = Session["User"].ToString();
 
-
-
+            //Get wishlists where username is equal to id and the user's wishlist is public
             var wishLists = db.wishLists.Include(w => w.game).Include(w => w.user)
-                .Where(w => w.username == currentUser);
-           
+                .Where(w => w.username == id)
+                .Where(w => w.user.publicWishlist == true);
 
-            return View(wishLists.ToList().Where(w => w.username == currentUser));
+            //Return wishlist 
+            return View(wishLists.ToList());
         }
 
-        // GET: WishList/Details/5
+        // GET: WishList/Details
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -63,31 +63,25 @@ namespace CVGS.Controllers
         {
             if (ModelState.IsValid)
             {
+                //get current user
                 string currentUser = Session["User"].ToString();
-                var gameItems = db.games.ToList();
-                var userItems = db.users.ToList();
+
+                //Check if game already exists on wishlist
+                var gameExists = db.wishLists.FirstOrDefault(m => m.gameId == id);
                 
 
-                
-                int counter = 0;
-                var last = gameItems.Last();
-                foreach (var item in gameItems)
+                if (gameExists != null)
                 {
-                    counter++;
-                   
-                    if (item.id == id)
-                    {
-                        var newItem = db.wishLists.Add(wishList);
-                        newItem.username = Session["User"].ToString();
-                        newItem.gameId = id;
-                        newItem.dateAdded = null;
-                        db.SaveChanges();
-                    }
-                   
-
+                    //Add to wishlist
+                    var newItem = db.wishLists.Add(wishList);
+                    newItem.username = Session["User"].ToString();
+                    newItem.gameId = id;
+                    newItem.dateAdded = null;
+                    db.SaveChanges();
                 }
 
-                return RedirectToAction("Index");
+                //Redirect to games page
+                return RedirectToAction("Index", "Game");
 
             }
 
@@ -154,8 +148,10 @@ namespace CVGS.Controllers
             wishList wishList = db.wishLists.Find(Session["User"].ToString(), id);
             db.wishLists.Remove(wishList);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Wishlist");
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

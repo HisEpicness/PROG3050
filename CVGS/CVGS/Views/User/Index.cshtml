@@ -45,6 +45,9 @@
         <td>
             @Html.ActionLink("Details", "Details", new { id = item.username })
         </td>
+        <td>
+            @Html.ActionLink("Wishlist", "Index", "Wishlist", new { id = item.username }, null)
+        </td>
     </tr>
 }
 
