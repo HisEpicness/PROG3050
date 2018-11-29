@@ -76,12 +76,15 @@
     </dl>
 </div>
 <div>
+    @Html.ActionLink("=> Go to all Reviews", "Index", "Review", new { id = Model.id }, null)
+</div>
+<div>
     @using (Html.BeginForm("Index", "Review"))
     {
-    <div class="col-md-10">
-        <textarea class="form-control text-box multi-line" id="txtAreaReview" name="txtAreaReview" rows="3"></textarea>
-        <span class="field-validation-valid text-danger" data-valmsg-for="txtAreaReview" data-valmsg-replace="true"></span>
-    </div>
+        <div class="col-md-10">
+            <textarea class="form-control text-box multi-line" id="txtAreaReview" name="txtAreaReview" rows="3"></textarea>
+            <span class="field-validation-valid text-danger" data-valmsg-for="txtAreaReview" data-valmsg-replace="true"></span>
+        </div>
         <input type="hidden" name="id" value="@Model.id" />
         <input type="submit" value="Add Review" />
     }
