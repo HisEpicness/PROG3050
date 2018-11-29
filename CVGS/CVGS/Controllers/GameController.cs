@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CVGS;
+using System.IO;
+
 
 namespace CVGS.Controllers
 {
@@ -16,14 +18,33 @@ namespace CVGS.Controllers
         private CVGSEntities db = new CVGSEntities();
 
 
-        // GET: Game
+        //Get games list for index view
         public ActionResult Index()
         {
             var games = db.games.Include(g => g.esrb_rating).Include(g => g.genre1).Include(g => g.genre2);
             return View(games.ToList());
         }
 
-        // GET: Game/Details/5
+        //Search functionality on index page
+        [HttpGet]
+        public ActionResult Index(string Search)
+        {
+            string s1 = Search;
+            
+            var games = db.games.Include(g => g.esrb_rating).Include(g => g.genre1).Include(g => g.genre2);
+
+            if (Search != null)
+            {
+                return View(db.games.Where(g => g.name.Contains(Search)));
+            }
+            else
+            {
+                return View(games.ToList());
+            }
+            
+        }
+
+        // GET: Game/Details
         public ActionResult Details(decimal id)
         {
             if (id == null)
@@ -138,5 +159,33 @@ namespace CVGS.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Download()
+        {
+            string path = Server.MapPath("~/Images/");
+            DirectoryInfo dirInfo = new DirectoryInfo(path);
+            FileInfo[] files = dirInfo.GetFiles("*.*");
+            List<string> lst = new List<string>(files.Length);
+            foreach (var item in files)
+            {
+                lst.Add(item.Name);
+            }
+            return View(lst);
+        }
+
+        public ActionResult DownloadFile(string filename)
+        {
+            if(Path.GetExtension(filename) == ".png")
+            {
+                string fullPath = Path.Combine(Server.MapPath("~/Images/"), filename);
+                return File(fullPath, "Images/png");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.Forbidden);   
+            }
+        }
+
+
     }
 }
