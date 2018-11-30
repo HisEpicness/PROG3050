@@ -18,6 +18,8 @@ namespace CVGS
         public string review1 { get; set; }
         public decimal gameId { get; set; }
         public string username { get; set; }
+        public Nullable<bool> approve { get; set; }
+        public Nullable<int> rating { get; set; }
     
         public virtual game game { get; set; }
     }

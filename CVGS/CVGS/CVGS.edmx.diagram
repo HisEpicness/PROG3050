@@ -35,14 +35,14 @@
         <EntityTypeShape EntityType="CVGSModel.FriendsList" Width="1.5" PointX="8.25" PointY="12.625" />
         <EntityTypeShape EntityType="CVGSModel.order" Width="1.5" PointX="13.25" PointY="6.75" />
         <EntityTypeShape EntityType="CVGSModel.orderStatu" Width="1.5" PointX="11" PointY="7.375" />
-        <EntityTypeShape EntityType="CVGSModel.review" Width="1.5" PointX="5.25" PointY="12.5" />
         <AssociationConnector Association="CVGSModel.FK__creditInf__cardT__7A3223E8" />
         <AssociationConnector Association="CVGSModel.FK__creditInf__usern__7B264821" />
         <AssociationConnector Association="CVGSModel.FK_FriendsList_FriendsList" />
         <AssociationConnector Association="CVGSModel.FK__orders__gameId__4F7CD00D" />
-        <AssociationConnector Association="CVGSModel.FK_reviews_user" />
         <AssociationConnector Association="CVGSModel.FK__orders__status__756D6ECB" />
         <AssociationConnector Association="CVGSModel.FK__orders__username__4E88ABD4" />
+        <EntityTypeShape EntityType="CVGSModel.review" Width="1.5" PointX="5.25" PointY="12.75" />
+        <AssociationConnector Association="CVGSModel.FK_reviews_user" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -153,6 +153,8 @@
     <EntitySetMapping Name="reviews">
       <EntityTypeMapping TypeName="CVGSModel.review">
         <MappingFragment StoreEntitySet="reviews">
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="approve" ColumnName="approve" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="gameId" ColumnName="gameId" />
           <ScalarProperty Name="review1" ColumnName="review" />

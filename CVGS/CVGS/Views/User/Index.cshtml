@@ -6,9 +6,6 @@
 
 <h2>Users</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -44,6 +41,9 @@
 
         <td>
             @Html.ActionLink("Details", "Details", new { id = item.username })
+        </td>
+        <td>
+            @Html.ActionLink("Wishlist", "Index", "Wishlist", new { id = item.username }, null)
         </td>
     </tr>
 }
