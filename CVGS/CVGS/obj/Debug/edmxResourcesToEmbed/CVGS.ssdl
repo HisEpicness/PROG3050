@@ -117,6 +117,8 @@
     <Property Name="review" Type="nvarchar(max)" Nullable="false" />
     <Property Name="gameId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="approve" Type="bit" />
+    <Property Name="rating" Type="int" />
   </EntityType>
   <EntityType Name="user">
     <Key>
