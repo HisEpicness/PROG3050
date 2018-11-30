@@ -5,7 +5,6 @@
 }
 
 <h2>Index</h2>
-
 <table class="table">
     <tr>
         <th>
@@ -14,6 +13,12 @@
         <th>
             Reviewed By
         </th>
+        @if (Session["Emp"] != null)
+        {
+            <th>
+                Approve
+            </th>
+        }
         <th>
             Ratings
         </th>
@@ -28,6 +33,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.username)
             </td>
+            @if (Session["Emp"] != null)
+            {
+                <td>
+                    @using (Html.BeginForm("Create", "Review"))
+                    {
+                        <input type="checkbox" name="cId" id="cId" checked="@item.approve" />
+                        <input type="hidden" name="id" value="@item.id" />
+                        <input type="hidden" name="gameId" value="@item.gameId" />
+                        <input type="submit" value="Submit" />
+                    }
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.rating)
             </td>
