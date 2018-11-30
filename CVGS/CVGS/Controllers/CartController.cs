@@ -26,6 +26,16 @@ namespace CVGS.Controllers
             var carts = db.carts
                 .Where(c => c.username == enteredUser);
 
+            // Calculate total & place it within a ViewBag for sending to views
+            decimal total = 0;
+            foreach (var item in carts)
+            {
+                total = (item.game.price * item.quantity);
+            }
+            // Convert to currency format
+            string strTotal = String.Format("Order Total: {0:C}", total);
+            ViewBag.Total = strTotal;
+
             return View(carts.ToList().Where(c => c.username == enteredUser));
         }
 
@@ -75,15 +85,11 @@ namespace CVGS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(int id,[Bind(Include = "username,gameId,quantity")] cart cart)
         {
-            //cart.gameId = id;
-            //cart.username = Session["User"].ToString();
-            //cart.quantity = 1;
             if (ModelState.IsValid)
             {
                 // Filter list of cart items to include only the current users' items
                 string currentUser = Session["User"].ToString();
                 var cartItems = db.carts                  
-                    //.Where(c => c.username == currentUser)
                     .ToList();
 
                 // See if selected games' id can be found within this list

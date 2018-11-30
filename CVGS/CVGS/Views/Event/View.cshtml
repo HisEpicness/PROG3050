@@ -39,6 +39,6 @@
             @Html.DisplayFor(item => item.createdBy)
         </dd>
     </dl>
+    @Html.ActionLink("Register for Event", "Create", "EventRegister", new { id = Model.eventId }, null) | @* Pass eventId to EventRegisters' Create method *@
     @Html.ActionLink("Back to Events List", "Index")
-
 </div>

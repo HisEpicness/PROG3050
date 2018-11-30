@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<CVGS.cart>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Your Cart";
 }
 
-<h2>Index</h2>
+<h2>Your Cart</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -15,32 +15,38 @@
             User
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.game.name)*@ Game Name
+            Game Name
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.quantity)*@ Quantity
+            Quantity
         </th>
 
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.game.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.quantity)
-        </td>
-        <td>
-            @Html.ActionLink("Change Quantity", "Edit", new { id = item.gameId }) |
-            @Html.ActionLink("Game Details", "Details", "Game", new { id = item.gameId }, null) |
-            @Html.ActionLink("Remove from Cart", "Delete", new { id = item.gameId })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.game.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Change Quantity", "Edit", new { id = item.gameId }) |
+                @Html.ActionLink("Game Details", "Details", "Game", new { id = item.gameId }, null) |
+                @Html.ActionLink("Remove from Cart", "Delete", new { id = item.gameId })
+            </td>
+        </tr>
+    }
 </table>
+
+@* Display total price *@
+<b>@ViewBag.Total</b><p />
+
+@* Direct to Create Order *@
+@Html.ActionLink("Checkout", "Create", "Orders", null, null)
