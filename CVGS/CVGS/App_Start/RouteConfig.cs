@@ -20,8 +20,8 @@ namespace CVGS
             routes.MapRoute(
                     name: "Default",
                     url: "{controller}/{action}/{id}",
-                    defaults: new { action = "Index", id = UrlParameter.Optional }
-                );
+                    defaults: new { controller = "Event", action = "Index", id = UrlParameter.Optional }
+                ).DataTokens.Add("area", "Event");
         }
     }
 }

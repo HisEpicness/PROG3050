@@ -15,5 +15,11 @@ namespace CVGS.Models
         public string shipAddress { get; set; }
         public decimal age { get; set; }
         public Nullable<bool> employee { get; set; }
+        public string favPlatform { get; set; }
+        public string favPlatform2 { get; set; }
+        public string favGenre { get; set; }
+        public string favGenre2 { get; set; }
+        public bool promoEmails { get; set; }
+        public bool publicWishlist { get; set; }
     }
 }

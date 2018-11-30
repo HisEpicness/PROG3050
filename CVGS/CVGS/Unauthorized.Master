@@ -49,12 +49,18 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                        <li><a runat="server" href="~/Default">Home</a></li>
+                        <li><a runat="server" href="/Event/Index">Events</a></li>
+                        <li><a runat="server" href="/Game/Index">Games</a></li>
+                        <li><a runat="server" href="/User/Index">Users</a></li>
+                        <li><a runat="server" href="/Cart/Index">Cart</a></li>
+                        <li><a runat="server" href="/FriendsAndFamily/Index">Friends</a></li>
+                        <li><a runat="server" href="/Orders/Index">Orders</a></li>
+
+
                         <% if (Session["Emp"] != null)
                                 { %>
-                                                    <li><a runat="server" href="~/Contact">emp check</a></li>
+                            <li><a runat="server" href="~/Reports">Reports</a></li>
 
                         <% } %>
                     </ul>
@@ -67,7 +73,8 @@
                             <% } %>
                             <%else{ %>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Session["User"]  %> !</a></li>
+                                <li><a runat="server" href="#" onserverclick="ViewProfile">View Profile</a></li>
+
                                 <li>
                                     <a runat="server" href="~/Account/Login" onserverclick="LoggingOut">Log Out</a>
                                 </li>

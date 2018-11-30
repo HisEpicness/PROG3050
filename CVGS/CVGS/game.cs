@@ -17,8 +17,10 @@ namespace CVGS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public game()
         {
+            this.carts = new HashSet<cart>();
             this.orders = new HashSet<order>();
-            this.users = new HashSet<user>();
+            this.wishLists = new HashSet<wishList>();
+            this.reviews = new HashSet<review>();
         }
     
         public decimal id { get; set; }
@@ -30,12 +32,16 @@ namespace CVGS
         public string rating { get; set; }
         public decimal price { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cart> carts { get; set; }
         public virtual esrb_rating esrb_rating { get; set; }
         public virtual genre genre1 { get; set; }
         public virtual genre genre2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<user> users { get; set; }
+        public virtual ICollection<wishList> wishLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<review> reviews { get; set; }
     }
 }

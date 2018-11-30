@@ -19,6 +19,8 @@ namespace CVGS
         {
             this.games = new HashSet<game>();
             this.games1 = new HashSet<game>();
+            this.users = new HashSet<user>();
+            this.users1 = new HashSet<user>();
         }
     
         public string genreKey { get; set; }
@@ -28,5 +30,9 @@ namespace CVGS
         public virtual ICollection<game> games { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<game> games1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<user> users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<user> users1 { get; set; }
     }
 }

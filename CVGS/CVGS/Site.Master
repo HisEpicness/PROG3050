@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CVGS.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="CVGS.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -49,14 +49,19 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <%--<li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>--%>
+                        <%--<li><a runat="server" href="~/Default">Home</a></li>
+                        <li><a runat="server" href="/Event/Index">Events</a></li>
+                        <li><a runat="server" href="/Game/Index">Games</a></li>
+                        <% if (Session["Emp"] != null)
+                                { %>
+                                                    <li><a runat="server" href="~/Contact">emp check</a></li>
+
+                        <% } %>--%>
                     </ul>
                             <% if (Session["Check"] == null)
                                 { %>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Register">Sign Up</a></li>
+                                <li><a runat="server" href="~/Account/Register">Register</a></li>
                                 <li><a runat="server" href="~/Account/Login">Log in</a></li>
                             </ul>
                             <% } %>
