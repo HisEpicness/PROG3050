@@ -808,6 +808,7 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\creditInformationController.cs" />
     <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\EventRegisterController.cs" />
     <Compile Include="Controllers\FriendsAndFamilyController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -844,6 +845,9 @@
     <Compile Include="eventData.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
+    <Compile Include="event_register.cs">
+      <DependentUpon>CVGS.tt</DependentUpon>
+    </Compile>
     <Compile Include="FriendsList.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
@@ -860,7 +864,9 @@
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\CreditInformationsModel.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\EventRegister.cs" />
     <Compile Include="Models\FriendsLists.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -998,6 +1004,7 @@
     <Content Include="Views\Review\Index.cshtml" />
     <Content Include="Views\FriendsAndFamily\Create.cshtml" />
     <Content Include="Views\FriendsAndFamily\Index.cshtml" />
+    <Content Include="Views\EventRegister\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

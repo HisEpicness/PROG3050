@@ -26,8 +26,8 @@ namespace CVGS
         public string createdBy { get; set; }
         public string description { get; set; }
     
+        public virtual user user { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<event_register> event_register { get; set; }
-        public virtual user user { get; set; }
     }
 }

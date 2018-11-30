@@ -43,6 +43,9 @@
         <AssociationConnector Association="CVGSModel.FK__orders__username__4E88ABD4" />
         <EntityTypeShape EntityType="CVGSModel.review" Width="1.5" PointX="5.25" PointY="12.75" />
         <AssociationConnector Association="CVGSModel.FK_reviews_user" />
+        <EntityTypeShape EntityType="CVGSModel.event_register" Width="1.5" PointX="13.5" PointY="3.875" />
+        <AssociationConnector Association="CVGSModel.FK_event_register_eventData" />
+        <AssociationConnector Association="CVGSModel.FK_event_register_login" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

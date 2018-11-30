@@ -39,14 +39,18 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.description)
                 </td>
-                @if (Session["Emp"] != null)
-                {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.eventId }) |
-                        @Html.ActionLink("View", "View", new { id = item.eventId }) |
+                
+                <td>
+                    @Html.ActionLink("View", "View", new { id = item.eventId })
+                    <br />
+                    @if (Session["Emp"] != null)
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.eventId }) 
+                        <br />
                         @Html.ActionLink("Delete", "Delete", new { id = item.eventId })
-                    </td>
-                }
+                    }
+                </td>
+                
             </tr>
 
         }

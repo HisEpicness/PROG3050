@@ -41,5 +41,6 @@ namespace CVGS
         public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<orderStatu> orderStatus { get; set; }
         public virtual DbSet<review> reviews { get; set; }
+        public virtual DbSet<event_register> event_register { get; set; }
     }
 }

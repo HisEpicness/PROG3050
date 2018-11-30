@@ -162,5 +162,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="event_register">
+      <EntityTypeMapping TypeName="CVGSModel.event_register">
+        <MappingFragment StoreEntitySet="event_register">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="eventId" ColumnName="eventId" />
+          <ScalarProperty Name="registerId" ColumnName="registerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

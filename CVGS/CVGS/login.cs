@@ -18,6 +18,7 @@ namespace CVGS
         public login()
         {
             this.carts = new HashSet<cart>();
+            this.event_register = new HashSet<event_register>();
         }
     
         public string username { get; set; }
@@ -26,5 +27,7 @@ namespace CVGS
         public virtual user user { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cart> carts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<event_register> event_register { get; set; }
     }
 }

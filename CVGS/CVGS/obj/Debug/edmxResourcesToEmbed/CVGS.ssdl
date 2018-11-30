@@ -33,6 +33,14 @@
     <Property Name="ratingCode" Type="char" MaxLength="10" Nullable="false" />
     <Property Name="description" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="event_register">
+    <Key>
+      <PropertyRef Name="registerId" />
+    </Key>
+    <Property Name="registerId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="eventId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="eventData">
     <Key>
       <PropertyRef Name="eventId" />
@@ -118,7 +126,7 @@
     <Property Name="gameId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="approve" Type="bit" />
-    <Property Name="rating" Type="int" />
+    <Property Name="rating" Type="numeric" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="user">
     <Key>
@@ -376,6 +384,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_event_register_eventData">
+    <End Role="eventData" Type="Self.eventData" Multiplicity="1" />
+    <End Role="event_register" Type="Self.event_register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="eventData">
+        <PropertyRef Name="eventId" />
+      </Principal>
+      <Dependent Role="event_register">
+        <PropertyRef Name="eventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_event_register_login">
+    <End Role="login" Type="Self.login" Multiplicity="1" />
+    <End Role="event_register" Type="Self.event_register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="event_register">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_FriendsList_FriendsList">
     <End Role="user" Type="Self.user" Multiplicity="1" />
     <End Role="FriendsList" Type="Self.FriendsList" Multiplicity="*" />
@@ -405,6 +437,7 @@
     <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="creditInformation" EntityType="Self.creditInformation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="esrb_rating" EntityType="Self.esrb_rating" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="event_register" EntityType="Self.event_register" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="eventData" EntityType="Self.eventData" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FriendsList" EntityType="Self.FriendsList" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="game" EntityType="Self.game" Schema="dbo" store:Type="Tables" />
@@ -492,6 +525,14 @@
     <AssociationSet Name="FK_cart_login" Association="Self.FK_cart_login">
       <End Role="login" EntitySet="login" />
       <End Role="cart" EntitySet="cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_event_register_eventData" Association="Self.FK_event_register_eventData">
+      <End Role="eventData" EntitySet="eventData" />
+      <End Role="event_register" EntitySet="event_register" />
+    </AssociationSet>
+    <AssociationSet Name="FK_event_register_login" Association="Self.FK_event_register_login">
+      <End Role="login" EntitySet="login" />
+      <End Role="event_register" EntitySet="event_register" />
     </AssociationSet>
     <AssociationSet Name="FK_FriendsList_FriendsList" Association="Self.FK_FriendsList_FriendsList">
       <End Role="user" EntitySet="user" />
