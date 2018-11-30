@@ -768,6 +768,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="cardType.cs">
+      <DependentUpon>CVGS.tt</DependentUpon>
+    </Compile>
     <Compile Include="cart.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
@@ -780,7 +783,13 @@
     </Compile>
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\FriendsAndFamilyController.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="creditInformation.cs">
+      <DependentUpon>CVGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\creditInformationController.cs" />
     <Compile Include="CVGS.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -809,6 +818,9 @@
     <Compile Include="eventData.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
+    <Compile Include="FriendsList.cs">
+      <DependentUpon>CVGS.tt</DependentUpon>
+    </Compile>
     <Compile Include="game.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
@@ -823,11 +835,13 @@
     </Compile>
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\FriendsLists.cs" />
     <Compile Include="Models\GameModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Metadata\EventMetadata.cs" />
     <Compile Include="Models\PassResetModel.cs" />
+    <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\SalesModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\WishListModel.cs" />
@@ -835,6 +849,10 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="order.cs">
+      <DependentUpon>CVGS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="orderStatu.cs">
       <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
     <Compile Include="passReset.cs">
@@ -855,6 +873,9 @@
     </Compile>
     <Compile Include="Reports.aspx.designer.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="review.cs">
+      <DependentUpon>CVGS.tt</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -923,6 +944,19 @@
     <Content Include="Views\Cart\Details.cshtml" />
     <Content Include="Views\Cart\Edit.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\creditInformation\Create.cshtml" />
+    <Content Include="Views\creditInformation\Delete.cshtml" />
+    <Content Include="Views\creditInformation\Details.cshtml" />
+    <Content Include="Views\creditInformation\Edit.cshtml" />
+    <Content Include="Views\creditInformation\Index.cshtml" />
+    <Content Include="Views\FriendsAndFamily\Create.cshtml" />
+    <Content Include="Views\FriendsAndFamily\Index.cshtml" />
+    <Content Include="Views\Review\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -12,6 +12,6 @@ namespace CVGS.Models
         public decimal gameId { get; set; }
         public string username { get; set; }
         public bool approve { get; set; }
-
+        public int rating { get; set; }
     }
 }

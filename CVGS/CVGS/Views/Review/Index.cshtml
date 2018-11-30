@@ -19,6 +19,9 @@
                 Approve
             </th>
         }
+        <th>
+            Ratings
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -42,6 +45,9 @@
                     }
                 </td>
             }
+            <td>
+                @Html.DisplayFor(modelItem => item.rating)
+            </td>
         </tr>
     }
 </table>

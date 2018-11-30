@@ -50,17 +50,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="orders">
-      <EntityTypeMapping TypeName="CVGSModel.order">
-        <MappingFragment StoreEntitySet="orders">
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="orderId" ColumnName="orderId" />
-          <ScalarProperty Name="gameId" ColumnName="gameId" />
-          <ScalarProperty Name="orderDate" ColumnName="orderDate" />
-          <ScalarProperty Name="shipDate" ColumnName="shipDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="passResets">
       <EntityTypeMapping TypeName="CVGSModel.passReset">
         <MappingFragment StoreEntitySet="passReset">
@@ -112,6 +101,62 @@
           <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="gameId" ColumnName="gameId" />
           <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cardTypes">
+      <EntityTypeMapping TypeName="CVGSModel.cardType">
+        <MappingFragment StoreEntitySet="cardType">
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="creditInformations">
+      <EntityTypeMapping TypeName="CVGSModel.creditInformation">
+        <MappingFragment StoreEntitySet="creditInformation">
+          <ScalarProperty Name="securityCode" ColumnName="securityCode" />
+          <ScalarProperty Name="expiryDate" ColumnName="expiryDate" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="cardType" ColumnName="cardType" />
+          <ScalarProperty Name="cardHolder" ColumnName="cardHolder" />
+          <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FriendsLists">
+      <EntityTypeMapping TypeName="CVGSModel.FriendsList">
+        <MappingFragment StoreEntitySet="FriendsList">
+          <ScalarProperty Name="FriendIId" ColumnName="FriendIId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="CVGSModel.order">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="shipDate" ColumnName="shipDate" />
+          <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+          <ScalarProperty Name="gameId" ColumnName="gameId" />
+          <ScalarProperty Name="orderId" ColumnName="orderId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderStatus">
+      <EntityTypeMapping TypeName="CVGSModel.orderStatu">
+        <MappingFragment StoreEntitySet="orderStatus">
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reviews">
+      <EntityTypeMapping TypeName="CVGSModel.review">
+        <MappingFragment StoreEntitySet="reviews">
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="gameId" ColumnName="gameId" />
+          <ScalarProperty Name="review1" ColumnName="review" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

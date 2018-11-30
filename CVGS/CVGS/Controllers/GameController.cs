@@ -34,7 +34,7 @@ namespace CVGS.Controllers
             if (game == null)
             {
                 return HttpNotFound();
-            }
+            }            
             return View(game);
         }
 
