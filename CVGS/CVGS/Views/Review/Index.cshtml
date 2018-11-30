@@ -14,6 +14,9 @@
         <th>
             Reviewed By
         </th>
+        <th>
+            Ratings
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -25,9 +28,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.username)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rating)
+            </td>
         </tr>
     }
-
 </table>
 <p>
     @Html.ActionLink("Back to Games", "Index", "Game")
