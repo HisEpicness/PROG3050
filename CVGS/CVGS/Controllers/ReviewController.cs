@@ -12,16 +12,18 @@ namespace CVGS.Controllers
 
         // GET: Review
         [HttpPost]
-        public ActionResult Index(Decimal id, String txtAreaReview)
+        public ActionResult Index(Decimal id, String txtAreaReview, FormCollection form)
         {
 
             if (id != null)
             {
+                String rate = form["rate"];
                 review review = new review();
                 var username = Session["User"].ToString();
                 review.gameId = id;
                 review.review1 = txtAreaReview;
                 review.username = username;
+                review.rating = Int32.Parse(rate);
                 review p = db.reviews.OrderByDescending(c => c.id).FirstOrDefault();
                 int newId = (null == p ? 0 : p.id) + 1;
                 review.id = newId;
