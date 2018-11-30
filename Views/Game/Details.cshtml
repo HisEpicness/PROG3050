@@ -1,0 +1,95 @@
+﻿@model CVGS.game
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of Game</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.publisher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.publisher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.publishDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.publishDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.esrb_rating.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.esrb_rating.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genre1.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genre1.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genre2.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genre2.name)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @using (Html.BeginForm("Index", "Review"))
+    {
+    <div class="col-md-10">
+        <textarea class="form-control text-box multi-line" id="txtAreaReview" name="txtAreaReview" rows="3"></textarea>
+        <span class="field-validation-valid text-danger" data-valmsg-for="txtAreaReview" data-valmsg-replace="true"></span>
+    </div>
+        <input type="hidden" name="id" value="@Model.id" />
+        <input type="submit" value="Add Review" />
+    }
+</div>
+
+<div>
+    <br /><br /><br />
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Add to Cart", "Create", "Cart", new { id = Model.id }, null) | @* Pass gameId to CartControllers' Create method *@
+    @Html.ActionLink("Back to List", "Index")
+</div>
